@@ -12,6 +12,6 @@ public class oneController {
     @Operation(summary = "myTest")
     public String myTestGet(@RequestParam String name){
         LibraryCore libraryCore = LibraryCore.getInstance();
-        return "Number of books " + name + "!" + libraryCore.getBooks();
+        return "Number of bookssss " + name + "!" + libraryCore.getBooks();
     }
 }
