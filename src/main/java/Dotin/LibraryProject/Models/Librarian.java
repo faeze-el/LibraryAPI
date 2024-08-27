@@ -1,0 +1,38 @@
+package Dotin.LibraryProject.Models;
+
+import Dotin.LibraryProject.Utils.LibraryCore;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Librarian extends User {
+    public Librarian(String name) {
+        super(name);
+    }
+    @Override
+    public List<String> getAvailableCommands() {
+        List<String> actions = new ArrayList<String>();
+        actions.add("Approve or Reject a reserve. Request ID, approve or reject. for example : 4 approve");
+        actions.add("View the list of requests");
+        actions.add("View the list of books");
+        return actions;
+    }
+
+    @Override
+    public String executeCommand(int commandIndex, String args){
+        LibraryCore libraryCore = LibraryCore.getInstance();
+        switch (commandIndex) {
+            case 1:
+                return libraryCore.approveRequest(args);
+            case 2:
+                System.out.println("requests");
+                return libraryCore.getRequestsAsString();
+            case 3:
+                System.out.println("books");
+                return libraryCore.getBooksAsString();
+            default:
+                System.out.println("Invalid action.");
+        }
+        return "";
+    }
+}
