@@ -24,7 +24,7 @@ public class Admin extends User {
         switch (commandIndex) {
             case 1:
                 System.out.println("adding book ..");
-                return libraryCore.addBook(args);
+                return libraryCore.addBookCommand(args);
                 //commandHandler.addBook(args);
             case 2:
                 System.out.println("removing book ..");

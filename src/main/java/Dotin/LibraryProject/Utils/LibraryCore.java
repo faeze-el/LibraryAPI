@@ -73,6 +73,15 @@ public class LibraryCore {
         }
         return result;
     }
+    public String addBook(String name, boolean isAvailable){
+        if(!name.isEmpty()) {
+            int idb = books.size()+1;
+            Book book = new Book(idb, name, true);
+            books.add(book);
+            return String.format("%s book was added with %d id",name, idb);
+        }
+        else return "Enter valid arguments";
+    }
     public String getRequestsAsString()
     {
         String result= "";
@@ -122,14 +131,18 @@ public class LibraryCore {
         requests.add(rq);
         return String.format("Your request for reservation of %s book is registered.",searchString);
     }
-    public String addBook(String args){
+    public String addBookCommand(String args){
         if(!args.isEmpty()) {
-            Book book = new Book(books.size(), args, true);
+            String[] argsArray = args.split(" ");
+            int idb = books.size()+1;
+            String name = argsArray[0];
+            Book book = new Book(idb, name, true);
             books.add(book);
-            return String.format("%s book was added.%n", args);
+            return String.format("%s book was added with %d id",name, idb);
         }
         else return "Enter valid arguments";
     }
+
     public String removeBook(String args){
         if(!args.isEmpty()) {
             books.remove(Integer.parseInt(args));
