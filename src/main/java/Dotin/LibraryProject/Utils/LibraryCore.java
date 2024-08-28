@@ -82,6 +82,15 @@ public class LibraryCore {
         }
         else return "Enter valid arguments";
     }
+    public String removeBookByTitle(String searchString){
+        int foundBookId =-1;
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(searchString)) foundBookId=book.getBookId();
+        }
+        if(foundBookId==-1) return String.format("Sorry, can not find %s in our library",searchString);
+        books.remove(foundBookId);
+        return String.format("%s book is removed from this library.",searchString);
+    }
     public String getRequestsAsString()
     {
         String result= "";
@@ -143,7 +152,7 @@ public class LibraryCore {
         else return "Enter valid arguments";
     }
 
-    public String removeBook(String args){
+    public String removeBookCommand(String args){
         if(!args.isEmpty()) {
             books.remove(Integer.parseInt(args));
             return String.format("The book with ID %s was deleted.%n", args);

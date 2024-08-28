@@ -28,7 +28,7 @@ public class Admin extends User {
                 //commandHandler.addBook(args);
             case 2:
                 System.out.println("removing book ..");
-                return libraryCore.removeBook(args);
+                return libraryCore.removeBookCommand(args);
                 //commandHandler.removeBook(args);
             case 3:
                 return libraryCore.getBooksAsString();

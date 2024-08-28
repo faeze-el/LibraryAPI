@@ -3,12 +3,10 @@ package Dotin.LibraryProject;
 import Dotin.LibraryProject.Models.Book;
 import Dotin.LibraryProject.Utils.LibraryCore;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.atomic.LongAdder;
 
 @RestController
 public class bookController {
@@ -17,16 +15,23 @@ public class bookController {
         libraryCore = LibraryCore.getInstance();
     }
 
-    @GetMapping("/books")
+    @GetMapping("/bookslist")
     @Operation(summary = "return list of books")
     public String myTestGet(){
 
         List<Book> books = libraryCore.getBooks();
         return "There are " + books.size() + " books in this library:\n" + libraryCore.getBooks();
     }
-    @PostMapping("/addbook")
+
+    @PostMapping("/add")
     @Operation(summary = "add new book")
     public String myTestGet(@RequestParam String name, @RequestParam boolean isAvailable){
         return libraryCore.addBook(name, isAvailable);
+    }
+
+    @DeleteMapping("/books/{title}")
+    @Operation(summary = "remove a book")
+     public String deleteEmployee(@PathVariable String title) {
+        return libraryCore.removeBookByTitle(title);
     }
 }
