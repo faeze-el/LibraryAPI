@@ -23,7 +23,7 @@ public class Member extends User {
         LibraryCore libraryCore = LibraryCore.getInstance();
         switch (commandIndex) {
             case 1:
-                return libraryCore.reserveBookByTitle(args, this.id);
+                return libraryCore.reserveBookByTitleCommand(args, this.id);
             case 2:
                 return libraryCore.getBooksAsString();
             case 3:

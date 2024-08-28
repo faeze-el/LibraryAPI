@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.concurrent.atomic.LongAdder;
 
 @RestController
 public class bookController {
@@ -17,21 +16,20 @@ public class bookController {
 
     @GetMapping("/bookslist")
     @Operation(summary = "return list of books")
-    public String myTestGet(){
-
+    public String getBooksList(){
         List<Book> books = libraryCore.getBooks();
-        return "There are " + books.size() + " books in this library:\n" + libraryCore.getBooks();
+        return "There are " + books.size() + " books in this library:\n" + books;
     }
 
     @PostMapping("/add")
     @Operation(summary = "add new book")
-    public String myTestGet(@RequestParam String name, @RequestParam boolean isAvailable){
+    public String addNewBook(@RequestParam String name, @RequestParam boolean isAvailable){
         return libraryCore.addBook(name, isAvailable);
     }
 
     @DeleteMapping("/books/{title}")
     @Operation(summary = "remove a book")
-     public String deleteEmployee(@PathVariable String title) {
+     public String removeBook(@PathVariable String title) {
         return libraryCore.removeBookByTitle(title);
     }
 }

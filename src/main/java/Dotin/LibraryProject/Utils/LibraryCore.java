@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
-import java.sql.Date;
+import java.util.Date;
 
 public class LibraryCore {
     private static LibraryCore  instance;
@@ -49,10 +49,10 @@ public class LibraryCore {
     private void populateRequests(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            java.util.Date parsedDate = dateFormat.parse("2024-5-11");
-            Date issueDate = new java.sql.Date(parsedDate.getTime());
-            parsedDate = dateFormat.parse("2024-6-11");
-            Date returnDate = new java.sql.Date(parsedDate.getTime());
+            java.util.Date issueDate = dateFormat.parse("2024-5-11");
+            //Date issueDate = new java.sql.Date(parsedDate.getTime());
+            Date returnDate = dateFormat.parse("2024-6-11");
+            //Date returnDate = new java.sql.Date(parsedDate.getTime());
             requests.add(new ReservationRequest(requests.size()+1, 1, 0, issueDate,returnDate ));
             requests.add(new ReservationRequest(requests.size()+1,3,2,issueDate,returnDate));
         }
@@ -73,23 +73,9 @@ public class LibraryCore {
         }
         return result;
     }
-    public String addBook(String name, boolean isAvailable){
-        if(!name.isEmpty()) {
-            int idb = books.size()+1;
-            Book book = new Book(idb, name, true);
-            books.add(book);
-            return String.format("%s book was added with %d id",name, idb);
-        }
-        else return "Enter valid arguments";
-    }
-    public String removeBookByTitle(String searchString){
-        int foundBookId =-1;
-        for (Book book : books) {
-            if (book.getTitle().equalsIgnoreCase(searchString)) foundBookId=book.getBookId();
-        }
-        if(foundBookId==-1) return String.format("Sorry, can not find %s in our library",searchString);
-        books.remove(foundBookId);
-        return String.format("%s book is removed from this library.",searchString);
+    public List<ReservationRequest> getRequests()
+    {
+        return requests;
     }
     public String getRequestsAsString()
     {
@@ -99,6 +85,36 @@ public class LibraryCore {
             result +=System.lineSeparator();
         }
         return result;
+    }
+    public String addBook(String name, boolean isAvailable){
+        if(!name.isEmpty()) {
+            int idb = books.size()+1;
+            Book book = new Book(idb, name, true);
+            books.add(book);
+            return String.format("%s book was added with %d id",name, idb);
+        }
+        else return "Enter valid arguments";
+    }
+    int findBookByTitle(String searchString)
+    {
+        int foundBookId =-1;
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(searchString)) foundBookId=book.getBookId();
+        }
+        return foundBookId;
+    }
+    public String removeBookByTitle(String searchString){
+        int foundBookId = findBookByTitle(searchString);
+        if(foundBookId==-1) return String.format("Sorry, can not find %s in our library",searchString);
+        books.remove(foundBookId);
+        return String.format("%s book is removed from this library.",searchString);
+    }
+    public String reserveBookByTitle(String searchString , int userID, Date inDate, Date outDate){
+        int foundBookId = findBookByTitle(searchString);
+        if(foundBookId==-1) return String.format("Sorry, can not find %s in our library",searchString);
+        ReservationRequest rq = new ReservationRequest(requests.size()+1,userID, foundBookId,inDate, outDate );
+        requests.add(rq);
+        return String.format("Your request for reservation of %s book is registered.",searchString);
     }
     public String getReservedRequestsByUserId(int userID){
         String result = "";
@@ -111,7 +127,7 @@ public class LibraryCore {
         if(result.isEmpty()) result = String.format("Can not find request by your ID:%d",userID);
         return result;
     }
-    public String reserveBookByTitle(String args, int userID){
+    public String reserveBookByTitleCommand(String args, int userID){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         java.sql.Date issueDate = null, returnDate;
         String searchString;
