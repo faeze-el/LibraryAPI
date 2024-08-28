@@ -27,7 +27,7 @@ public class Member extends User {
             case 2:
                 return libraryCore.getBooksAsString();
             case 3:
-                return libraryCore.getReservedRequestsByUserId(this.id);
+                return libraryCore.getReservedRequestsByUserIdCommand(this.id);
             default:
                 System.out.println("Invalid action.");
         }

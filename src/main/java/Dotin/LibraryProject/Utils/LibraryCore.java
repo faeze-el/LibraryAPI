@@ -116,7 +116,16 @@ public class LibraryCore {
         requests.add(rq);
         return String.format("Your request for reservation of %s book is registered.",searchString);
     }
-    public String getReservedRequestsByUserId(int userID){
+    public List<ReservationRequest> getReservedRequestsByUserId(int userID){
+        List<ReservationRequest> res =new ArrayList<>();
+        for (ReservationRequest request : requests) {
+            if (request.getUserId() == userID){
+                res.add(request);
+            }
+        }
+        return res;
+    }
+    public String getReservedRequestsByUserIdCommand(int userID){
         String result = "";
         for (ReservationRequest request : requests) {
             if (request.getUserId() == userID){
