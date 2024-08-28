@@ -184,14 +184,12 @@ public class LibraryCore {
         }
         else return "Enter valid arguments";
     }
-    public String approveRequest(String args) {
+    public String approveRequest(int requestId, String args) {
         if (!args.isEmpty()) {
-            String[] argsArray = args.split(" ");
-            int requestId = Integer.parseInt(argsArray[0]);
-            String checkApprove = argsArray[1].toLowerCase();
-            if (checkApprove.equals("approve") || checkApprove.equals("reject")) {
-                requests.get(requestId-1).setIsApproved(checkApprove);
-                return String.format("The request was %s with ID %d", checkApprove, requestId);
+            args = args.toLowerCase();
+            if (args.equals("approve") || args.equals("reject")) {
+                requests.get(requestId-1).setIsApproved(args);
+                return String.format("The request was %s with ID %d", args, requestId);
             } else return "Enter valid arguments";
         }
         else return "Enter valid arguments";
