@@ -39,7 +39,7 @@ public class reservationController {
         return "There are " + reqs.size() + " requests for you:\n" + reqs;
     }
 
-    @PostMapping("/requestsList/{requestId}")
+    @PutMapping("/requestsList/{requestId}")
     @Operation(summary = "reject or approve a request")
     public String updateRequest(@RequestParam int requestId, @RequestParam String isApproved){
         return libraryCore.approveRequest(requestId,isApproved);
