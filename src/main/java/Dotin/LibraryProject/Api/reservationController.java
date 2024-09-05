@@ -1,4 +1,4 @@
-package Dotin.LibraryProject;
+package Dotin.LibraryProject.Api;
 
 import Dotin.LibraryProject.Models.ReservationRequest;
 import Dotin.LibraryProject.Utils.LibraryCore;

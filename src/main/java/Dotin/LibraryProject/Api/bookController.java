@@ -1,4 +1,4 @@
-package Dotin.LibraryProject;
+package Dotin.LibraryProject.Api;
 
 import Dotin.LibraryProject.Models.Book;
 import Dotin.LibraryProject.Utils.LibraryCore;
