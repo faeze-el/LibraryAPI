@@ -1,9 +1,9 @@
 package Dotin.LibraryProject.Utils;
 
-import Dotin.LibraryProject.Models.User;
-import Dotin.LibraryProject.Models.Admin;
-import Dotin.LibraryProject.Models.Member;
-import Dotin.LibraryProject.Models.Librarian;
+import Dotin.LibraryProject.Entity.User;
+import Dotin.LibraryProject.Entity.Admin;
+import Dotin.LibraryProject.Entity.Member;
+import Dotin.LibraryProject.Entity.Librarian;
 
 
 public class UserFactory {

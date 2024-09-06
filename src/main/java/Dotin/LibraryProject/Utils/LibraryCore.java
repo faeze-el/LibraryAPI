@@ -1,8 +1,8 @@
 package Dotin.LibraryProject.Utils;
 
-import Dotin.LibraryProject.Models.Book;
-import Dotin.LibraryProject.Models.ReservationRequest;
-import Dotin.LibraryProject.Models.User;
+import Dotin.LibraryProject.Entity.Book;
+import Dotin.LibraryProject.Entity.ReservationRequest;
+import Dotin.LibraryProject.Entity.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,10 +31,10 @@ public class LibraryCore {
         populateRequests();
     }
     private void populateBooks() {
-        books.add(new Book(0,"To Kill a Mockingbird", true));
-        books.add(new Book(1, "1984", true));
-        books.add(new Book(2, "The Great Gatsby", true));
-        books.add(new Book(3, "Harry Potter and the Sorcerer's Stone", true));
+        books.add(new Book(0L,"To Kill a Mockingbird", true));
+        books.add(new Book(1L, "1984", true));
+        books.add(new Book(2L, "The Great Gatsby", true));
+        books.add(new Book(3L, "Harry Potter and the Sorcerer's Stone", true));
     }
     private void populateUsers() {
         User user = UserFactory.createUser("admin", "Sara");
@@ -88,31 +88,31 @@ public class LibraryCore {
     }
     public String addBook(String name, boolean isAvailable){
         if(!name.isEmpty()) {
-            int idb = books.size()+1;
+            Long idb = (long) (books.size()+1);
             Book book = new Book(idb, name, true);
             books.add(book);
             return String.format("%s book was added with %d id",name, idb);
         }
         else return "Enter valid arguments";
     }
-    int findBookByTitle(String searchString)
+    Long findBookByTitle(String searchString)
     {
-        int foundBookId =-1;
+        Long foundBookId = (long) -1;
         for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(searchString)) foundBookId=book.getBookId();
         }
         return foundBookId;
     }
     public String removeBookByTitle(String searchString){
-        int foundBookId = findBookByTitle(searchString);
+        Long foundBookId = findBookByTitle(searchString);
         if(foundBookId==-1) return String.format("Sorry, can not find %s in our library",searchString);
         books.remove(foundBookId);
         return String.format("%s book is removed from this library.",searchString);
     }
     public String reserveBookByTitle(String searchString , int userID, Date inDate, Date outDate){
-        int foundBookId = findBookByTitle(searchString);
+        Long foundBookId = findBookByTitle(searchString);
         if(foundBookId==-1) return String.format("Sorry, can not find %s in our library",searchString);
-        ReservationRequest rq = new ReservationRequest(requests.size()+1,userID, foundBookId,inDate, outDate );
+        ReservationRequest rq = new ReservationRequest(requests.size()+1,userID, Math.toIntExact(foundBookId),inDate, outDate );
         requests.add(rq);
         return String.format("Your request for reservation of %s book is registered.",searchString);
     }
@@ -156,19 +156,19 @@ public class LibraryCore {
         }
         else return "Enter valid arguments";
 
-        int foundBookId =-1;
+        Long foundBookId = (long) -1;
         for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(searchString)) foundBookId=book.getBookId();
         }
         if(foundBookId==-1) return String.format("Sorry, can not find %s in our library",searchString);
-        ReservationRequest rq = new ReservationRequest(requests.size()+1,userID, foundBookId,issueDate, returnDate );
+        ReservationRequest rq = new ReservationRequest(requests.size()+1,userID, Math.toIntExact(foundBookId),issueDate, returnDate );
         requests.add(rq);
         return String.format("Your request for reservation of %s book is registered.",searchString);
     }
     public String addBookCommand(String args){
         if(!args.isEmpty()) {
             String[] argsArray = args.split(" ");
-            int idb = books.size()+1;
+            Long idb = (long) (books.size()+1);
             String name = argsArray[0];
             Book book = new Book(idb, name, true);
             books.add(book);
