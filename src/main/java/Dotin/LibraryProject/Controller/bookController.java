@@ -24,11 +24,12 @@ public class bookController {
         return service.getBooks();
     }
 
-//    @PostMapping("/add")
-//    @Operation(summary = "add new book")
-//    public String addNewBook(@RequestParam String name, @RequestParam boolean isAvailable){
-//        return libraryCore.addBook(name, isAvailable);
-//    }
+    @PostMapping("/books")
+    @Operation(summary = "add new book")
+    public String addNewBook(@RequestParam String name){
+        service.addNewBook(name);
+        return "success";
+    }
 //
 //    @DeleteMapping("/books/{title}")
 //    @Operation(summary = "remove a book")

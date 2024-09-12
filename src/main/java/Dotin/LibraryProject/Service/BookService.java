@@ -11,9 +11,10 @@ import java.util.List;
 public class BookService {
 
     @Autowired
-    private BookRepositoryNoDb bookRepositoryNoDb;
+    private BookRepositoryNoDb bookRepository;
 
     public List<Book> getBooks() {
-        return bookRepositoryNoDb.getAllBooks();
+        return bookRepository.getAllBooks();
     }
+    public void addNewBook(String title) { bookRepository.addBook(title);}
 }
