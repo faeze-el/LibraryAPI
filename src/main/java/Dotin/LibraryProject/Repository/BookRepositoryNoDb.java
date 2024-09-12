@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class BookRepositoryNoDb  implements   BookRepository{
@@ -28,5 +29,19 @@ public class BookRepositoryNoDb  implements   BookRepository{
             if (b.getBookId() == id) return b;
         }
         return null;
+    }
+    public Book getBookByTitle(String title){
+        for(Book b : list){
+            if (Objects.equals(b.getTitle(), title)) return b;
+        }
+        return null;
+    }
+    public boolean removeBookByTitle(String title){
+        Book b = getBookByTitle(title);
+        if(Objects.nonNull(b)){
+            list.remove(b);
+            return true;
+        }
+        return false;
     }
 }

@@ -41,10 +41,11 @@ public class bookController {
         service.addNewBook(name);
         return "success";
     }
-//
-//    @DeleteMapping("/books/{title}")
-//    @Operation(summary = "remove a book")
-//     public String removeBook(@PathVariable String title) {
-//        return libraryCore.removeBookByTitle(title);
-//    }
+
+    @DeleteMapping("{title}")
+    @Operation(summary = "remove a book by title")
+     public String removeBook(@PathVariable String title) {
+        boolean flag = service.removeBookByTitle(title);
+        return  flag ? "Book removed" : "Can not find the book";
+    }
 }

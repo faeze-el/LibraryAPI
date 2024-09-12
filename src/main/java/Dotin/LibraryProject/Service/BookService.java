@@ -18,4 +18,5 @@ public class BookService {
     }
     public void addNewBook(String title) { bookRepository.addBook(title);}
     public Book getBookById(Long id) { return bookRepository.getBookById(id);}
+    public boolean removeBookByTitle(String title) {return bookRepository.removeBookByTitle(title);};
 }
