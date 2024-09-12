@@ -23,4 +23,10 @@ public class BookRepositoryNoDb  implements   BookRepository{
         Book b = new Book((long) list.size()+1, title, true);
         list.add(b);
     }
+    public Book getBookById(Long id){
+        for(Book b : list){
+            if (b.getBookId() == id) return b;
+        }
+        return null;
+    }
 }

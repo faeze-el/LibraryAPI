@@ -17,4 +17,5 @@ public class BookService {
         return bookRepository.getAllBooks();
     }
     public void addNewBook(String title) { bookRepository.addBook(title);}
+    public Book getBookById(Long id) { return bookRepository.getBookById(id);}
 }
