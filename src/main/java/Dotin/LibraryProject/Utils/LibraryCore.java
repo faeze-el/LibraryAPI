@@ -1,6 +1,7 @@
 package Dotin.LibraryProject.Utils;
 
 import Dotin.LibraryProject.Entity.Book;
+import Dotin.LibraryProject.Entity.BookStatus;
 import Dotin.LibraryProject.Entity.ReservationRequest;
 import Dotin.LibraryProject.Entity.User;
 
@@ -31,10 +32,10 @@ public class LibraryCore {
         populateRequests();
     }
     private void populateBooks() {
-        books.add(new Book(0L,"To Kill a Mockingbird", true));
-        books.add(new Book(1L, "1984", true));
-        books.add(new Book(2L, "The Great Gatsby", true));
-        books.add(new Book(3L, "Harry Potter and the Sorcerer's Stone", true));
+        books.add(new Book(0L,"To Kill a Mockingbird", BookStatus.BOOKABLE));
+        books.add(new Book(1L, "1984", BookStatus.BOOKABLE));
+        books.add(new Book(2L, "The Great Gatsby", BookStatus.BOOKABLE));
+        books.add(new Book(3L, "Harry Potter and the Sorcerer's Stone", BookStatus.BOOKABLE));
     }
     private void populateUsers() {
         User user = UserFactory.createUser("admin", "Sara");
@@ -89,7 +90,7 @@ public class LibraryCore {
     public String addBook(String name, boolean isAvailable){
         if(!name.isEmpty()) {
             Long idb = (long) (books.size()+1);
-            Book book = new Book(idb, name, true);
+            Book book = new Book(idb, name, BookStatus.BOOKABLE);
             books.add(book);
             return String.format("%s book was added with %d id",name, idb);
         }
@@ -170,7 +171,7 @@ public class LibraryCore {
             String[] argsArray = args.split(" ");
             Long idb = (long) (books.size()+1);
             String name = argsArray[0];
-            Book book = new Book(idb, name, true);
+            Book book = new Book(idb, name, BookStatus.BOOKABLE);
             books.add(book);
             return String.format("%s book was added with %d id",name, idb);
         }

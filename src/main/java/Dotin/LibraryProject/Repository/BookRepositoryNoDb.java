@@ -2,6 +2,7 @@ package Dotin.LibraryProject.Repository;
 
 import Dotin.LibraryProject.Controller.bookController;
 import Dotin.LibraryProject.Entity.Book;
+import Dotin.LibraryProject.Entity.BookStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -17,9 +18,9 @@ public class BookRepositoryNoDb  implements   BookRepository{
     private static final Logger logger = LoggerFactory.getLogger(BookRepositoryNoDb.class);
 
     private List<Book> list = new ArrayList<>(Arrays.asList(
-            new Book(1L, "book1", true),
-            new Book(2L, "book2", true),
-            new Book(3L, "book3", true)
+            new Book(1L, "book1", BookStatus.BOOKABLE),
+            new Book(2L, "book2", BookStatus.BOOKABLE),
+            new Book(3L, "book3", BookStatus.BOOKABLE)
     ));
 
     public List<Book> getAllBooks() {
@@ -27,7 +28,7 @@ public class BookRepositoryNoDb  implements   BookRepository{
     }
 
     public void addBook(Book b) {
-        Book book = new Book((long) list.size()+1, b.getTitle(), b.isAvailable());
+        Book book = new Book((long) list.size()+1, b.getTitle(), b.getBookStatus());
         list.add(book);
         logger.info("{} is added to the list", b);
     }

@@ -8,14 +8,14 @@ import lombok.*;
 public @Data class Book {
     Long bookId;
     String title;
-    boolean isAvailable;
+    BookStatus bookStatus;
 
     @Override
     public String toString() {
         return "Book{" +
                 "Title='" + title + '\'' +
                 ", ID='" + this.bookId + '\'' +
-                ", isAvailable='" + this.isAvailable + '\'' +
+                ", isAvailable='" + this.bookStatus + '\'' +
                 '}';
     }
 
