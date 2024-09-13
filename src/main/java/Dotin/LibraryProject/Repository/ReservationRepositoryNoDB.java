@@ -6,10 +6,7 @@ import Dotin.LibraryProject.Entity.ReservationStatus;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Repository
 public class ReservationRepositoryNoDB implements ReservationRepository{
@@ -21,7 +18,13 @@ public class ReservationRepositoryNoDB implements ReservationRepository{
     public List<ReservationRequest> getAllReservations() {
         return list;
     }
-
+    public List<ReservationRequest> getReservationsById(Long id){
+        List<ReservationRequest> reservations = new ArrayList<>();
+        for(ReservationRequest r : list){
+            if(Objects.equals(r.getUserId(), id)) reservations.add(r);
+        }
+        return reservations;
+    }
     public void addReservation(ReservationRequest reservation) {
         reservation.setRequestId((long) (list.size()+1));
         list.add(reservation);

@@ -1,5 +1,6 @@
 package Dotin.LibraryProject.Controller;
 
+import Dotin.LibraryProject.Entity.Book;
 import Dotin.LibraryProject.Entity.ReservationRequest;
 import Dotin.LibraryProject.Service.ReservationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/reservations")
@@ -31,14 +33,13 @@ public class reservationController {
         service.addNewReservation(req);
         return new ResponseEntity<>("The request added successfully", HttpStatus.CREATED);
     }
-//
-//    @PostMapping("/addr")
-//    @Operation(summary = "add new reservation request")
-//    public String addNewRequest(@RequestParam String bookTitle, @RequestParam int userId , @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    final Date issueDate , @DateTimeFormat(pattern = "yyyy-MM-dd") final Date returnDate )  {
-//        return libraryCore.reserveBookByTitle(bookTitle, userId, issueDate, returnDate );
-//    }
-//
+
+    @GetMapping("{id}")
+    @Operation(summary = "return reservation requests by user_id given")
+    public ResponseEntity< List<ReservationRequest>> getReservationsByUserId(@PathVariable Long id){
+        List<ReservationRequest> res = service.getReservationsByUserId(id);
+        return new ResponseEntity<>(res, !res.isEmpty() ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    }
 //    @GetMapping("/requestsList/{userId}")
 //    @Operation(summary = "return list of a user requests")
 //    public String getRequestsByUserId(@PathVariable int userId){

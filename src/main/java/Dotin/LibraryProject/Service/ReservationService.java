@@ -16,6 +16,6 @@ public class ReservationService {
     public List<ReservationRequest> getReservationRequestList() {
         return reservationRepository.getAllReservations();
     }
+    public List<ReservationRequest> getReservationsByUserId(Long id) { return  reservationRepository.getReservationsById(id);}
     public void addNewReservation(ReservationRequest res) {reservationRepository.addReservation(res);}
-
 }
