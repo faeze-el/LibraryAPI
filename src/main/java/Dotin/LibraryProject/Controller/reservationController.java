@@ -1,12 +1,12 @@
 package Dotin.LibraryProject.Controller;
 
 import Dotin.LibraryProject.Entity.ReservationRequest;
-import Dotin.LibraryProject.Service.BookService;
 import Dotin.LibraryProject.Service.ReservationService;
-import Dotin.LibraryProject.Utils.LibraryCore;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -24,6 +24,12 @@ public class reservationController {
     @Operation(summary = "return list of reservation requests")
     public List<ReservationRequest> getRequestsList(){
         return service.getReservationRequestList();
+    }
+    @PostMapping
+    @Operation(summary = "add new reservation request")
+    public ResponseEntity<String> addNewReservation(@RequestBody ReservationRequest req){
+        service.addNewReservation(req);
+        return new ResponseEntity<>("The request added successfully", HttpStatus.CREATED);
     }
 //
 //    @PostMapping("/addr")

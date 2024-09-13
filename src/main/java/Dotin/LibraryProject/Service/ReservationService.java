@@ -9,10 +9,13 @@ import java.util.List;
 
 @Service
 public class ReservationService {
+
     @Autowired
     private ReservationRepositoryNoDB reservationRepository;
 
     public List<ReservationRequest> getReservationRequestList() {
         return reservationRepository.getAllReservations();
     }
+    public void addNewReservation(ReservationRequest res) {reservationRepository.addReservation(res);}
+
 }

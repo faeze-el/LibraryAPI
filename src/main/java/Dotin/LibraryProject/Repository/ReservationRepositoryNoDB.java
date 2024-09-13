@@ -1,5 +1,6 @@
 package Dotin.LibraryProject.Repository;
 
+import Dotin.LibraryProject.Entity.Book;
 import Dotin.LibraryProject.Entity.ReservationRequest;
 import Dotin.LibraryProject.Entity.ReservationStatus;
 import org.springframework.stereotype.Repository;
@@ -19,6 +20,11 @@ public class ReservationRepositoryNoDB implements ReservationRepository{
 
     public List<ReservationRequest> getAllReservations() {
         return list;
+    }
+
+    public void addReservation(ReservationRequest reservation) {
+        reservation.setRequestId((long) (list.size()+1));
+        list.add(reservation);
     }
 
     public static LocalDate randomDate() {

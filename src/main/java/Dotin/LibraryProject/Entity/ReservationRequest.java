@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +14,7 @@ public @Data class ReservationRequest {
     Long bookId;
     LocalDate issueDate;
     LocalDate returnDate;
-    ReservationStatus isApproved = ReservationStatus.PENDING_APPROVAL;
+    ReservationStatus reservationStatus = ReservationStatus.PENDING_APPROVAL;
 
     @Override
     public String toString() {
@@ -25,7 +24,7 @@ public @Data class ReservationRequest {
                 ", bookId='" + this.bookId + '\'' +
                 ", issueDate=" + issueDate + '\'' +
                 ", returnDate=" + returnDate + '\'' +
-                ", isApproved=" + isApproved +
+                ", isApproved=" + reservationStatus +
                 '}';
     }
 }
