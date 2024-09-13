@@ -53,8 +53,8 @@ public class LibraryCore {
             //Date issueDate = new java.sql.Date(parsedDate.getTime());
             Date returnDate = dateFormat.parse("2024-6-11");
             //Date returnDate = new java.sql.Date(parsedDate.getTime());
-            requests.add(new ReservationRequest(requests.size()+1, 1, 0, issueDate,returnDate ));
-            requests.add(new ReservationRequest(requests.size()+1,3,2,issueDate,returnDate));
+            //requests.add(new ReservationRequest(requests.size()+1, 1, 0, issueDate,returnDate ));
+            //requests.add(new ReservationRequest(requests.size()+1,3,2,issueDate,returnDate));
         }
         catch (ParseException e){
 
@@ -112,8 +112,8 @@ public class LibraryCore {
     public String reserveBookByTitle(String searchString , int userID, Date inDate, Date outDate){
         Long foundBookId = findBookByTitle(searchString);
         if(foundBookId==-1) return String.format("Sorry, can not find %s in our library",searchString);
-        ReservationRequest rq = new ReservationRequest(requests.size()+1,userID, Math.toIntExact(foundBookId),inDate, outDate );
-        requests.add(rq);
+        //ReservationRequest rq = new ReservationRequest(requests.size()+1,userID, Math.toIntExact(foundBookId),inDate, outDate );
+        //requests.add(rq);
         return String.format("Your request for reservation of %s book is registered.",searchString);
     }
     public List<ReservationRequest> getReservedRequestsByUserId(int userID){
@@ -161,8 +161,8 @@ public class LibraryCore {
             if (book.getTitle().equalsIgnoreCase(searchString)) foundBookId=book.getBookId();
         }
         if(foundBookId==-1) return String.format("Sorry, can not find %s in our library",searchString);
-        ReservationRequest rq = new ReservationRequest(requests.size()+1,userID, Math.toIntExact(foundBookId),issueDate, returnDate );
-        requests.add(rq);
+        //ReservationRequest rq = new ReservationRequest(requests.size()+1,userID, Math.toIntExact(foundBookId),issueDate, returnDate );
+        //requests.add(rq);
         return String.format("Your request for reservation of %s book is registered.",searchString);
     }
     public String addBookCommand(String args){
@@ -190,7 +190,7 @@ public class LibraryCore {
             int requestId = Integer.parseInt(argsArray[0]);
             String checkApprove = argsArray[1].toLowerCase();
             if (checkApprove.equals("approve") || checkApprove.equals("reject")) {
-                requests.get(requestId-1).setIsApproved(checkApprove);
+                //requests.get(requestId-1).setIsApproved(checkApprove);
                 return String.format("The request was %s with ID %d", checkApprove, requestId);
             } else return "Enter valid arguments";
         }

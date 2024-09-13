@@ -1,8 +1,11 @@
 package Dotin.LibraryProject.Controller;
 
 import Dotin.LibraryProject.Entity.ReservationRequest;
+import Dotin.LibraryProject.Service.BookService;
+import Dotin.LibraryProject.Service.ReservationService;
 import Dotin.LibraryProject.Utils.LibraryCore;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,19 +14,17 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@RequestMapping("/reservations")
 public class reservationController {
-//    LibraryCore libraryCore;
-//    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//    public reservationController(){
-//        libraryCore = LibraryCore.getInstance();
-//    }
-//
-//    @GetMapping("/requestsList")
-//    @Operation(summary = "return list of requests")
-//    public String getRequestsList(){
-//        List<ReservationRequest> reqs = libraryCore.getRequests();
-//        return "There are " + reqs.size() + " requests in this library:\n" + reqs;
-//    }
+
+    @Autowired
+    private ReservationService service;
+
+    @GetMapping
+    @Operation(summary = "return list of reservation requests")
+    public List<ReservationRequest> getRequestsList(){
+        return service.getReservationRequestList();
+    }
 //
 //    @PostMapping("/addr")
 //    @Operation(summary = "add new reservation request")

@@ -1,28 +1,22 @@
 package Dotin.LibraryProject.Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 import java.util.Date;
 
-public class ReservationRequest {
-    int requestId;
-    int userId;
-    int bookId;
-    Date issueDate;
-    Date returnDate;
-    String isApproved;
-    public ReservationRequest(int requestId, int userId, int bookId, Date issueDate, Date returnDate)
-    {
-        this.requestId = requestId;
-        this.userId = userId;
-        this.bookId = bookId;
-        this.issueDate = issueDate;
-        this.returnDate = returnDate;
-        this.isApproved = "under review";
-    }
+@AllArgsConstructor
+@NoArgsConstructor
+public @Data class ReservationRequest {
+    Long requestId;
+    Long userId;
+    Long bookId;
+    LocalDate issueDate;
+    LocalDate returnDate;
+    ReservationStatus isApproved = ReservationStatus.PENDING_APPROVAL;
 
-    public int getUserId(){
-        return userId;
-    }
-    public void setIsApproved(String s){isApproved = s;}
     @Override
     public String toString() {
         return "Request{" +
