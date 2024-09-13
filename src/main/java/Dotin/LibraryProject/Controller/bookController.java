@@ -30,16 +30,16 @@ public class bookController {
 
     @GetMapping("{id}")
     @Operation(summary = "return a book by id given or null if not found")
-    public ResponseEntity<Book> getBookByID(@RequestParam Long id){
+    public ResponseEntity<Book> getBookByID(@PathVariable Long id){
         Book res = service.getBookById(id);
         return new ResponseEntity<>(res, Objects.nonNull(res) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
     @Operation(summary = "add new book")
-    public String addNewBook(@RequestParam String name){
-        service.addNewBook(name);
-        return "success";
+    public ResponseEntity<String> addNewBook(@RequestBody Book book){
+        service.addNewBook(book);
+        return new ResponseEntity<>("The book added successfully", HttpStatus.CREATED);
     }
 
     @DeleteMapping("{title}")

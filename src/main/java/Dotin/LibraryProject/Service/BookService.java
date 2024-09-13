@@ -16,7 +16,7 @@ public class BookService {
     public List<Book> getBooks() {
         return bookRepository.getAllBooks();
     }
-    public void addNewBook(String title) { bookRepository.addBook(title);}
+    public void addNewBook(Book b) { bookRepository.addBook(b);}
     public Book getBookById(Long id) { return bookRepository.getBookById(id);}
     public boolean removeBookByTitle(String title) {return bookRepository.removeBookByTitle(title);};
 }

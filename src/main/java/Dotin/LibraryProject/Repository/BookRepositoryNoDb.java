@@ -20,9 +20,9 @@ public class BookRepositoryNoDb  implements   BookRepository{
         return list;
     }
 
-    public void addBook(String title) {
-        Book b = new Book((long) list.size()+1, title, true);
-        list.add(b);
+    public void addBook(Book b) {
+        Book book = new Book((long) list.size()+1, b.getTitle(), b.isAvailable());
+        list.add(book);
     }
     public Book getBookById(Long id){
         for(Book b : list){
