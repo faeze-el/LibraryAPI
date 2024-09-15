@@ -3,7 +3,7 @@ package Dotin.LibraryProject.Utils;
 import Dotin.LibraryProject.Entity.Book;
 import Dotin.LibraryProject.Entity.BookStatus;
 import Dotin.LibraryProject.Entity.ReservationRequest;
-import Dotin.LibraryProject.Entity.User;
+import Dotin.LibraryProject.Entity.UserOld;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +19,7 @@ public class LibraryCore {
     }
 
     private static List<Book> books;
-    private static List<User> users;
+    private static List<UserOld> users;
     private static List<ReservationRequest> requests;
 
     public LibraryCore ()
@@ -38,7 +38,7 @@ public class LibraryCore {
         books.add(new Book(3L, "Harry Potter and the Sorcerer's Stone", BookStatus.BOOKABLE));
     }
     private void populateUsers() {
-        User user = UserFactory.createUser("admin", "Sara");
+        UserOld user = UserFactory.createUser("admin", "Sara");
         users.add(user);
         user = UserFactory.createUser("member", "Ali");
         users.add(user);
@@ -197,10 +197,10 @@ public class LibraryCore {
         }
         else return "Enter valid arguments";
     }
-    public User login(String name){
-        User user = null;
+    public UserOld login(String name){
+        UserOld user = null;
         if(!name.isEmpty()) {
-            for (User countUser : users) {
+            for (UserOld countUser : users) {
                 if (countUser.getName().equals(name)) {
                     user = countUser;
                 }

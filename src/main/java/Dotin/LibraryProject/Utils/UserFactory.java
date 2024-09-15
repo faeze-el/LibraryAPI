@@ -1,13 +1,13 @@
 package Dotin.LibraryProject.Utils;
 
-import Dotin.LibraryProject.Entity.User;
+import Dotin.LibraryProject.Entity.UserOld;
 import Dotin.LibraryProject.Entity.Admin;
 import Dotin.LibraryProject.Entity.Member;
 import Dotin.LibraryProject.Entity.Librarian;
 
 
 public class UserFactory {
-    public static User createUser(String type, String name) {
+    public static UserOld createUser(String type, String name) {
         switch (type.toLowerCase()) {
             case "member":
                 return new Member(name);

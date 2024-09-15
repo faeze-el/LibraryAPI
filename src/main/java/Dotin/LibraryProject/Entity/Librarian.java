@@ -5,7 +5,7 @@ import Dotin.LibraryProject.Utils.LibraryCore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Librarian extends User {
+public class Librarian extends UserOld {
     public Librarian(String name) {
         super(name);
     }

@@ -8,7 +8,7 @@ import lombok.*;
 public @Data class Book {
     Long bookId;
     String title;
-    BookStatus bookStatus;
+    BookStatus bookStatus = BookStatus.BOOKABLE;
 
     @Override
     public String toString() {

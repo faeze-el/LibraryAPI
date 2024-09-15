@@ -1,15 +1,19 @@
 package Dotin.LibraryProject.Entity;
 
-import java.util.List;
+import lombok.*;
 
-public abstract class User {
-    protected String name;
-    protected int id;
-
-    public User(String name) {
-        this.name = name;
+@AllArgsConstructor
+@NoArgsConstructor
+public @Data class User {
+    Long id;
+    String name;
+    @Getter(AccessLevel.NONE)
+    String password;
+    @Override
+    public String toString() {
+        return "Book{" +
+                ", ID='" + this.id + '\'' +
+                ", Name='" + this.name + '\'' +
+                '}';
     }
-    public abstract List<String> getAvailableCommands();
-    public abstract String executeCommand(int actionIndex,String args);
-    public String getName() {return name;}
 }
