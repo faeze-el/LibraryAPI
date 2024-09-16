@@ -23,7 +23,13 @@ public class Librarian extends UserOld {
         LibraryCore libraryCore = LibraryCore.getInstance();
         switch (commandIndex) {
             case 1:
-                return libraryCore.approveRequest(args);
+                if (!args.isEmpty()) {
+                    String[] argsArray = args.split(" ");
+                    int requestId = Integer.parseInt(argsArray[0]);
+                    String checkApprove = argsArray[1].toLowerCase();
+                    return libraryCore.approveRequest(requestId, checkApprove);
+                }
+                else return "Enter valid arguments";
             case 2:
                 System.out.println("requests");
                 return libraryCore.getRequestsAsString();
