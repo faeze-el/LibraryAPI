@@ -1,7 +1,7 @@
 package Dotin.LibraryProject.Utils;
 
 import Dotin.LibraryProject.Entity.Book;
-import Dotin.LibraryProject.Entity.BookStatus;
+import Dotin.LibraryProject.Entity.Enums.BookStatus;
 import Dotin.LibraryProject.Entity.ReservationRequest;
 import Dotin.LibraryProject.Entity.UserOld;
 

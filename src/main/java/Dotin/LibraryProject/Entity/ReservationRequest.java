@@ -1,5 +1,6 @@
 package Dotin.LibraryProject.Entity;
 
+import Dotin.LibraryProject.Entity.Enums.ReservationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,5 +1,6 @@
 package Dotin.LibraryProject.Entity;
 
+import Dotin.LibraryProject.Entity.Enums.BookStatus;
 import lombok.*;
 
 

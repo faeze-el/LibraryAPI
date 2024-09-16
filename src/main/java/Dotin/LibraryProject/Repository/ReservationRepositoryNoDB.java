@@ -1,8 +1,7 @@
 package Dotin.LibraryProject.Repository;
 
-import Dotin.LibraryProject.Entity.Book;
 import Dotin.LibraryProject.Entity.ReservationRequest;
-import Dotin.LibraryProject.Entity.ReservationStatus;
+import Dotin.LibraryProject.Entity.Enums.ReservationStatus;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;

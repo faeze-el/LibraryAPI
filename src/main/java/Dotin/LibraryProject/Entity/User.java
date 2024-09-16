@@ -11,7 +11,7 @@ public @Data class User {
     String password;
     @Override
     public String toString() {
-        return "Book{" +
+        return "User{" +
                 ", ID='" + this.id + '\'' +
                 ", Name='" + this.name + '\'' +
                 '}';
