@@ -18,4 +18,7 @@ public class ReservationService {
     }
     public List<ReservationRequest> getReservationsByUserId(Long id) { return  reservationRepository.getReservationsById(id);}
     public void addNewReservation(ReservationRequest res) {reservationRepository.addReservation(res);}
+    public boolean updateReservation(Long id, String isApprove){
+        return reservationRepository.updateReservation(id, isApprove);
+    }
 }

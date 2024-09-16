@@ -30,6 +30,26 @@ public class ReservationRepositoryNoDB implements ReservationRepository{
         list.add(reservation);
     }
 
+    @Override
+    public boolean updateReservation(Long id, String isApprove) {
+        isApprove = isApprove.toLowerCase();
+        ReservationRequest request = null;
+        for (ReservationRequest req : list){
+            if (Objects.equals(req.getRequestId(), id))
+                request = req;
+        }
+        if (request != null){
+           if (isApprove.equals("approve")) {
+               request.setReservationStatus(ReservationStatus.APPROVED);
+           }
+           else if (isApprove.equals("reject")) {
+               request.setReservationStatus(ReservationStatus.REJECTED);
+           }
+           return true;
+        }
+        return false;
+    }
+
     public static LocalDate randomDate() {
         final int maxAge = 100 * 12 * 31;
         return LocalDate.now().minusDays(new Random().nextInt(maxAge));
