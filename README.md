@@ -1,23 +1,35 @@
-LibraryProject
-classes: User(Interface), Reader: User, Librarian:User, Book1 , LibraryCore
+# project Overview
+The Library System is a Java application that fasilate users to manage book reservations. The system supports different roles, including User, Librarian, and Admin. Each role has specific functionalities.
 
-Book1 properties: name, id, available
+## Admin jobs:
+- view list of books
+- add a book to books table
+- delete a book from books table
 
-Reader propertiess: name, id , pass
+## Librarian jobs:
+- view list of requests
+- can approve or reject the request
 
-Requests propertiess: userid, bookid, issuDate , returnDate , approved
+## Reader jobs:
+- view table of books
+- Book reservation request
+- view reserved books status
 
-Admin jobs:
 
-view list of books
-add a book to a books table
-delete a book from books table
-Librarian jobs:
+## Book properties:
+ - name
+ - id
+ - status
 
-view list of requests
-can approve or reject the request
-reader jobs:
+## User propertiess:
+- name
+- id
+- pass
 
-view table of books
-Book reservation request
-view reserved books status
+## Requests propertiess:
+- userid
+- bookid
+- issueDate
+- returnDate
+- status
+
