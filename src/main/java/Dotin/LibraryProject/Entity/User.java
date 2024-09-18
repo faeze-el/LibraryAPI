@@ -1,11 +1,9 @@
 package Dotin.LibraryProject.Entity;
 
+import Dotin.LibraryProject.Entity.Enums.UserRole;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +15,8 @@ public @Data class User {
     String name;
     @Getter(AccessLevel.NONE)
     String password;
+    @Enumerated(EnumType.STRING)
+    UserRole role;
     @Override
     public String toString() {
         return "User{" +
