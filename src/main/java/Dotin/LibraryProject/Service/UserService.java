@@ -11,18 +11,16 @@ import java.util.List;
 
 @Service
 public class UserService {
+//    @Autowired
+//    private UserRepositoryNoDB userRepository;
     @Autowired
-    private UserRepositoryNoDB userRepository;
-    @Autowired
-    private UserRepositoryByDb userRepositoryByDb;
+    private UserRepositoryByDb userRepository;
 
     public List<User> getUsers(){
-//        return userRepository.getAllUsers();
-        return userRepositoryByDb.getAllUsers();
+        return userRepository.getAllUsers();
     }
 
     public void addNewUser(User user){
-//        userRepository.addUser(user);
-        userRepositoryByDb.addUser(user);
+        userRepository.addUser(user);
     }
 }
