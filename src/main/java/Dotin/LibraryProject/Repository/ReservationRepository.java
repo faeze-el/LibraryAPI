@@ -1,12 +1,12 @@
 package Dotin.LibraryProject.Repository;
 
 import Dotin.LibraryProject.Entity.ReservationRequest;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface ReservationRepository {
-    public List<ReservationRequest> getAllReservations();
-    public List<ReservationRequest> getReservationsById(Long id);
-    public void addReservation(ReservationRequest reservation);
-    public boolean updateReservation(Long id, String isApprove);
+@Repository
+public interface ReservationRepository extends JpaRepository<ReservationRequest,Long> {
+    public List<ReservationRequest> getReservationRequestByUserId(Long id);
 }

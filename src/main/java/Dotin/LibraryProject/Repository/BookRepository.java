@@ -1,14 +1,13 @@
 package Dotin.LibraryProject.Repository;
 
 import Dotin.LibraryProject.Entity.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface BookRepository {
+@Repository
+public interface BookRepository extends JpaRepository<Book,Long> {
+    void deleteBookByTitle(String title);
 
-    public List<Book> getAllBooks();
-    public void addBook(Book b);
-    public Book getBookById(Long id);
-    public Book getBookByTitle(String title);
-    public boolean removeBookByTitle(String title);
 }

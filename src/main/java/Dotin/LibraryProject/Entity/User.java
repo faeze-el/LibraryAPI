@@ -16,7 +16,7 @@ public @Data class User {
     @Getter(AccessLevel.NONE)
     String password;
     @Enumerated(EnumType.STRING)
-    UserRole role;
+    UserRole role = UserRole.READER;
     @Override
     public String toString() {
         return "User{" +
