@@ -25,8 +25,7 @@ public class BookService {
         return bookRepository.findById(id).orElse(null);
     }
     @Transactional
-    public boolean removeBookByTitle(String title) {
-        bookRepository.deleteBookByTitle(title);
-        return true;
+    public Long removeBookByTitle(String title) {
+        return bookRepository.deleteBookByTitle(title);
     }
 }

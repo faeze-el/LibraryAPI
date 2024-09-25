@@ -45,7 +45,7 @@ public class bookController {
     @DeleteMapping("{title}")
     @Operation(summary = "remove a book by title")
      public String removeBook(@PathVariable String title) {
-        boolean flag = service.removeBookByTitle(title);
-        return  flag ? "Book removed" : "Can not find the book";
+        Long flag = service.removeBookByTitle(title);
+        return  flag==1 ? "Book removed" : "Can not find the book";
     }
 }
