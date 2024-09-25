@@ -1,31 +1,31 @@
 package Dotin.LibraryProject.Service;
 
 import Dotin.LibraryProject.Entity.Book;
-import Dotin.LibraryProject.Repository.BookRepositoryByDb;
-import Dotin.LibraryProject.Repository.BookRepositoryNoDb;
+import Dotin.LibraryProject.Repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 public class BookService {
 
     @Autowired
-    private BookRepositoryNoDb bookRepository;
-//    @Autowired
-//    private BookRepositoryByDb bookRepository;
+    private BookRepository bookRepository;
+
 
     public List<Book> getBooks() {
-        return bookRepository.getAllBooks();
+        return bookRepository.findAll();
     }
     public void addNewBook(Book b) {
-        bookRepository.addBook(b);
+        bookRepository.save(b);
     }
     public Book getBookById(Long id) {
-        return bookRepository.getBookById(id);
+        return bookRepository.findById(id).orElse(null);
     }
-    public boolean removeBookByTitle(String title) {
-        return bookRepository.removeBookByTitle(title);
+    @Transactional
+    public Long removeBookByTitle(String title) {
+        return bookRepository.deleteBookByTitle(title);
     }
 }
