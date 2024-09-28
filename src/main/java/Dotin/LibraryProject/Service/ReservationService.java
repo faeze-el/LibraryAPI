@@ -15,25 +15,25 @@ public class ReservationService {
     private ReservationRepository reservationRepository;
 
     public List<ReservationRequest> getReservationRequestList() {
-        return reservationRepository.findAll();
+        return reservationRepository.getAllReservations();
     }
-    public List<ReservationRequest> getReservationsByUserId(Long id) {
-        return reservationRepository.getReservationRequestByUserId(id);
+    public ReservationRequest getReservationsByUserId(Long id) {
+        return reservationRepository.getReservationsById(id);
     }
     public void addNewReservation(ReservationRequest res) {
-        reservationRepository.save(res);
+        reservationRepository.addReservation(res);
     }
     public boolean updateReservation(Long id, String isApprove){
         isApprove = isApprove.toLowerCase();
-        ReservationRequest request = reservationRepository.findById(id).orElse(null);
+        ReservationRequest request = reservationRepository.getReservationsById(id);
         if (request != null) {
             if (isApprove.equals("approve")) {
                 request.setReservationStatus(ReservationStatus.APPROVED);
-                reservationRepository.save(request);
+                reservationRepository.addReservation(request);
                 return true;
             } else if (isApprove.equals("reject")) {
                 request.setReservationStatus(ReservationStatus.REJECTED);
-                reservationRepository.save(request);
+                reservationRepository.addReservation(request);
                 return true;
             }
         }
