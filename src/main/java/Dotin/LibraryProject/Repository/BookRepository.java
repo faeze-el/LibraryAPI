@@ -7,7 +7,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BookRepository extends JpaRepository<Book,Long> {
-    Long deleteBookByTitle(String title);
+public interface BookRepository {
 
+    public List<Book> getAllBooks();
+    public void addBook(Book b);
+    public Book getBookById(Long id);
+    public Book getBookByTitle(String title);
+    public boolean removeBookByTitle(String title);
 }

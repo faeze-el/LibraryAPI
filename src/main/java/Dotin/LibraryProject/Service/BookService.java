@@ -16,16 +16,16 @@ public class BookService {
 
 
     public List<Book> getBooks() {
-        return bookRepository.findAll();
+        return bookRepository.getAllBooks();
     }
     public void addNewBook(Book b) {
-        bookRepository.save(b);
+        bookRepository.addBook(b);
     }
     public Book getBookById(Long id) {
-        return bookRepository.findById(id).orElse(null);
+        return bookRepository.getBookById(id);
     }
     @Transactional
-    public Long removeBookByTitle(String title) {
-        return bookRepository.deleteBookByTitle(title);
+    public boolean removeBookByTitle(String title) {
+        return bookRepository.removeBookByTitle(title);
     }
 }
