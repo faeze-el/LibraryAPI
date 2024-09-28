@@ -14,10 +14,10 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<User> getUsers(){
-        return userRepository.findAll();
+        return userRepository.getAllUsers();
     }
 
     public void addNewUser(User user){
-        userRepository.save(user);
+        userRepository.addUser(user);
     }
 }

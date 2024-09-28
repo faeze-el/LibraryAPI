@@ -13,19 +13,19 @@ import java.util.List;
 @RestController
 @RequestMapping("users")
 public class userController {
-//    @Autowired
-//    private UserService service;
-//
-//    @GetMapping
-//    @Operation(summary = "return list of users")
-//    public List<User> getUsersList(){
-//        return service.getUsers();
-//    }
-//
-//    @PostMapping
-//    @Operation(summary = "add new user")
-//    public ResponseEntity<String> addNewUser(@RequestBody User user){
-//        service.addNewUser(user);
-//        return new ResponseEntity<>("The User added successfully", HttpStatus.CREATED);
-//    }
+    @Autowired
+    private UserService service;
+
+    @GetMapping
+    @Operation(summary = "return list of users")
+    public List<User> getUsersList(){
+        return service.getUsers();
+    }
+
+    @PostMapping
+    @Operation(summary = "add new user")
+    public ResponseEntity<String> addNewUser(@RequestBody User user){
+        service.addNewUser(user);
+        return new ResponseEntity<>("The User added successfully", HttpStatus.CREATED);
+    }
 }
