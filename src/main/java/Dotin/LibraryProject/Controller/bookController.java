@@ -24,28 +24,25 @@ public class bookController {
 
     @GetMapping
     @Operation(summary = "return list of books")
-    public List<Book> getBooksList(){
+    public ResponseEntity<List<Book>> getBooksList(){
         return service.getBooks();
     }
 
     @GetMapping("{id}")
     @Operation(summary = "return a book by id given or null if not found")
     public ResponseEntity<Book> getBookByID(@PathVariable Long id){
-        Book res = service.getBookById(id);
-        return new ResponseEntity<>(res, Objects.nonNull(res) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        return service.getBookById(id);
     }
 
     @PostMapping
     @Operation(summary = "add new book")
     public ResponseEntity<String> addNewBook(@RequestBody Book book){
-        service.addNewBook(book);
-        return new ResponseEntity<>("The book added successfully", HttpStatus.CREATED);
+        return  service.addNewBook(book);
     }
 
     @DeleteMapping("{title}")
     @Operation(summary = "remove a book by title")
-     public String removeBook(@PathVariable String title) {
-        boolean flag = service.removeBookByTitle(title);
-        return  flag ? "Book removed" : "Can not find the book";
+     public ResponseEntity<String> removeBook(@PathVariable String title) {
+        return service.removeBookByTitle(title);
     }
 }
