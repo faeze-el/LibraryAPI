@@ -13,7 +13,7 @@ public @Data class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
-    @Getter(AccessLevel.NONE)
+   // @Getter(AccessLevel.NONE)
     String password;
     @Enumerated(EnumType.STRING)
     UserRole role = UserRole.READER;

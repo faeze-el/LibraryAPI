@@ -40,12 +40,9 @@ public class reservationController {
     @Operation(summary = "reject or approve a request")
     public ResponseEntity<String> updateReservationByRequestId(@PathVariable Long requestId, @RequestBody String isApprove){
         boolean flag = service.updateReservation(requestId, isApprove);
-        return new ResponseEntity<>(flag ?"The request update successfully": "Can not find the request!!", flag ? HttpStatus.CREATED : HttpStatus.NOT_FOUND);
+        if (flag){
+            return ResponseEntity.ok("The request update successfully");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Can not find the request!!");
     }
-//    @GetMapping("/requestsList/{userId}")
-//    @Operation(summary = "return list of a user requests")
-//    public String getRequestsByUserId(@PathVariable int userId){
-//        List<ReservationRequest> reqs = libraryCore.getReservedRequestsByUserId(userId);
-//        return "There are " + reqs.size() + " requests for you:\n" + reqs;
-//    }
 }
