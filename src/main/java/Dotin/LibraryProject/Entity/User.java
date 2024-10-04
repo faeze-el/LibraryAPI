@@ -8,10 +8,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "users")
 public @Data class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @Column(nullable = false, unique = true)
+    String username;
     String name;
     @Getter(AccessLevel.NONE)
     String password;
@@ -20,8 +23,10 @@ public @Data class User {
     @Override
     public String toString() {
         return "User{" +
-                ", ID='" + this.id + '\'' +
-                ", Name='" + this.name + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", userRole='" + role + '\'' +
                 '}';
     }
 }
