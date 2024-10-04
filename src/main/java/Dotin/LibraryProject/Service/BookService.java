@@ -2,6 +2,8 @@ package Dotin.LibraryProject.Service;
 
 import Dotin.LibraryProject.Entity.Book;
 import Dotin.LibraryProject.Repository.BookRepository;
+import Dotin.LibraryProject.Repository.BookRepositoryByDb;
+import Dotin.LibraryProject.Repository.BookRepositoryNoDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,7 @@ import java.util.Objects;
 public class BookService {
 
     @Autowired
-    private BookRepository bookRepository;
+    private BookRepositoryByDb bookRepository;
 
 
     public ResponseEntity<List<Book>> getBooks() {

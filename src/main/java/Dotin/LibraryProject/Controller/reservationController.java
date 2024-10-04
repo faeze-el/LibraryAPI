@@ -1,5 +1,6 @@
 package Dotin.LibraryProject.Controller;
 
+import Dotin.LibraryProject.Entity.Enums.ReservationStatus;
 import Dotin.LibraryProject.Entity.ReservationRequest;
 import Dotin.LibraryProject.Service.ReservationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,8 +39,8 @@ public class reservationController {
 
     @PutMapping("{requestId}")
     @Operation(summary = "reject or approve a request")
-    public ResponseEntity<String> updateReservationByRequestId(@PathVariable Long requestId, @RequestBody String isApprove){
-        boolean flag = service.updateReservation(requestId, isApprove);
+    public ResponseEntity<String> updateReservationByRequestId(@PathVariable Long requestId, @RequestParam("status") ReservationStatus status){
+        boolean flag = service.updateReservation(requestId, status);
         return new ResponseEntity<>(flag ?"The request update successfully": "Can not find the request!!", flag ? HttpStatus.CREATED : HttpStatus.NOT_FOUND);
     }
 }

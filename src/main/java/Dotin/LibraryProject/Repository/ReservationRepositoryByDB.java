@@ -38,18 +38,12 @@ public class ReservationRepositoryByDB implements ReservationRepository{
 
     @Transactional
     @Override
-    public boolean updateReservation(Long id, String isApprove) {
-        isApprove = isApprove.toLowerCase();
+    public boolean updateReservation(Long Id, ReservationStatus status) {
         boolean isUpdate = false;
-        ReservationRequest request = em.find(ReservationRequest.class, id);
-        if (request != null){
-            if (isApprove.equals("approve")) {
-                request.setReservationStatus(ReservationStatus.APPROVED);
-            }
-            else if (isApprove.equals("reject")) {
-                request.setReservationStatus(ReservationStatus.REJECTED);
-            }
-            isUpdate = true;
+        ReservationRequest request = em.find(ReservationRequest.class, Id);
+        if (request != null && status!=null){
+                request.setReservationStatus(status);
+                isUpdate = true;
         }
         return isUpdate;
     }
