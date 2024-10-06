@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -25,6 +26,11 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/books").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/books/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/reservations").hasRole("READER")
+                .antMatchers(HttpMethod.GET, "/reservations/{id}").hasRole("READER")
+                .antMatchers(HttpMethod.PUT, "/reservations/**").hasRole("LIBRARIAN")
+                .antMatchers(HttpMethod.GET, "/reservations").hasRole("LIBRARIAN")
+                .antMatchers("/users").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
