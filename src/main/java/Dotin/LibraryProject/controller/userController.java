@@ -13,8 +13,11 @@ import java.util.List;
 @RestController
 @RequestMapping("users")
 public class userController {
-    @Autowired
-    private UserService service;
+    private final UserService service;
+
+    public userController(UserService service) {
+        this.service = service;
+    }
 
     @GetMapping
     @Operation(summary = "return list of users")

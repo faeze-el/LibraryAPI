@@ -17,8 +17,11 @@ public class bookController {
 
     private static final Logger logger = LoggerFactory.getLogger(bookController.class);
 
-    @Autowired
-    private BookService service;
+    private final BookService service;
+
+    public bookController(BookService service) {
+        this.service = service;
+    }
 
     @GetMapping
     @Operation(summary = "return list of books")

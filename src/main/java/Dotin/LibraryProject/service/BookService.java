@@ -15,8 +15,11 @@ import java.util.Objects;
 @Service
 public class BookService {
 
-    @Autowired
-    private BookRepositoryByDb bookRepository;
+    private final BookRepositoryByDb bookRepository;
+
+    public BookService(BookRepositoryByDb bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
 
     public ResponseEntity<List<Book>> getBooks() {

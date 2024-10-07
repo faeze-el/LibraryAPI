@@ -11,8 +11,11 @@ import java.util.List;
 @Service
 public class ReservationService {
 
-    @Autowired
-    private ReservationRepositoryNoDB reservationRepository;
+    private final ReservationRepositoryNoDB reservationRepository;
+
+    public ReservationService(ReservationRepositoryNoDB reservationRepository) {
+        this.reservationRepository = reservationRepository;
+    }
 
     public List<ReservationRequest> getReservationRequestList() {
         return reservationRepository.getAllReservations();
