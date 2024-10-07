@@ -25,6 +25,7 @@ public class ReservationController {
     public List<ReservationRequest> getRequestsList(){
         return service.getReservationRequestList();
     }
+
     @PostMapping
     @Operation(summary = "add new reservation request")
     public ResponseEntity<String> addNewReservation(@RequestBody ReservationRequest req){

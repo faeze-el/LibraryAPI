@@ -43,6 +43,7 @@ public class BookController {
     @DeleteMapping("{title}")
     @Operation(summary = "remove a book by title")
      public ResponseEntity<String> removeBook(@PathVariable String title) {
+
         return service.removeBookByTitle(title);
     }
 }

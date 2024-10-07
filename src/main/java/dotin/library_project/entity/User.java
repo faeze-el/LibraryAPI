@@ -4,6 +4,7 @@ import dotin.library_project.entity.enums.UserRole;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,11 +17,17 @@ public @Data class User {
     @Column(nullable = false, unique = true)
     String username;
     String name;
+    @Column(nullable = false)
     @Getter(AccessLevel.NONE)
     String password;
     @Enumerated(EnumType.STRING)
     UserRole role = UserRole.ROLE_READER;
     Boolean enabled = true;
+
+    @OneToMany(targetEntity = ReservationRequest.class, mappedBy = "user")
+//    @JsonManagedReference()
+    private List<ReservationRequest> reservations;
+
     @Override
     public String toString() {
         return "User{" +

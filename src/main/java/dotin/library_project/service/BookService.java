@@ -25,12 +25,12 @@ public class BookService {
     public ResponseEntity<List<Book>> getBooks() {
         List<Book> books = bookRepository.getAllBooks();
         if(books!=null && !books.isEmpty())
-            return  new ResponseEntity<List<Book>>(books, HttpStatus.OK);
-        return new ResponseEntity<List<Book>>(new ArrayList<>(), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(books, HttpStatus.OK);
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
     }
     public ResponseEntity<String> addNewBook(Book b) {
         bookRepository.addBook(b);
-        return new ResponseEntity<String>("Book added successfully", HttpStatus.CREATED);
+        return new ResponseEntity<>("Book added successfully", HttpStatus.CREATED);
     }
     public ResponseEntity<Book> getBookById(Long id) {
         final Book result =  bookRepository.getBookById(id);
