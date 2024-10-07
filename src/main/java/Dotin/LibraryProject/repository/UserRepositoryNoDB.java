@@ -2,14 +2,16 @@ package Dotin.LibraryProject.repository;
 
 import Dotin.LibraryProject.entity.enums.UserRole;
 import Dotin.LibraryProject.entity.User;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Profile("NoDb")
 @Repository
-public class UserRepositoryNoDB implements UserRepository {
+class UserRepositoryNoDB implements UserRepository {
     private List<User> list = new ArrayList<>(Arrays.asList(
             new User(1L, "User1", "mina", "123456", UserRole.ROLE_ADMIN,true),
             new User(2L, "User2", "ali","123456", UserRole.ROLE_LIBRARIAN,true),

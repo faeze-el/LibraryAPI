@@ -2,6 +2,9 @@ package Dotin.LibraryProject.repository;
 
 
 import Dotin.LibraryProject.entity.Book;
+import org.hibernate.annotations.Parent;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -11,7 +14,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class BookRepositoryByDb implements BookRepository{
+@Profile({"ByDb"})
+class BookRepositoryByDb implements BookRepository{
 
     @PersistenceContext
     private EntityManager em;

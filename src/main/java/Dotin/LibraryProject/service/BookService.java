@@ -1,7 +1,7 @@
 package Dotin.LibraryProject.service;
 
 import Dotin.LibraryProject.entity.Book;
-import Dotin.LibraryProject.repository.BookRepositoryByDb;
+import Dotin.LibraryProject.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +15,11 @@ import java.util.Objects;
 @Service
 public class BookService {
 
-    private final BookRepositoryByDb bookRepository;
+    private final BookRepository bookRepository;
 
-    public BookService(BookRepositoryByDb bookRepository) {
+    public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
-
 
     public ResponseEntity<List<Book>> getBooks() {
         List<Book> books = bookRepository.getAllBooks();

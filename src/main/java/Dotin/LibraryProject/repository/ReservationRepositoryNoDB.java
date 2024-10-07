@@ -2,13 +2,15 @@ package Dotin.LibraryProject.repository;
 
 import Dotin.LibraryProject.entity.ReservationRequest;
 import Dotin.LibraryProject.entity.enums.ReservationStatus;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.*;
 
+@Profile("NoDb")
 @Repository
-public class ReservationRepositoryNoDB implements ReservationRepository{
+class ReservationRepositoryNoDB implements ReservationRepository{
     private List<ReservationRequest> list = new ArrayList<>(Arrays.asList(
             new ReservationRequest(1L, 1L, 1L, randomDate(), randomDate(), ReservationStatus.PENDING_APPROVAL),
             new ReservationRequest(2L, 1L, 3L, randomDate(), randomDate(), ReservationStatus.PENDING_APPROVAL)

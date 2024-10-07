@@ -2,8 +2,7 @@ package Dotin.LibraryProject.service;
 
 import Dotin.LibraryProject.entity.enums.ReservationStatus;
 import Dotin.LibraryProject.entity.ReservationRequest;
-import Dotin.LibraryProject.repository.ReservationRepositoryNoDB;
-import org.springframework.beans.factory.annotation.Autowired;
+import Dotin.LibraryProject.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +10,9 @@ import java.util.List;
 @Service
 public class ReservationService {
 
-    private final ReservationRepositoryNoDB reservationRepository;
+    private final ReservationRepository reservationRepository;
 
-    public ReservationService(ReservationRepositoryNoDB reservationRepository) {
+    public ReservationService(ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
     }
 

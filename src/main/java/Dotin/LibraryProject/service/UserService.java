@@ -1,8 +1,7 @@
 package Dotin.LibraryProject.service;
 
 import Dotin.LibraryProject.entity.User;
-import Dotin.LibraryProject.repository.UserRepositoryByDb;
-import org.springframework.beans.factory.annotation.Autowired;
+import Dotin.LibraryProject.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +9,9 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private final UserRepositoryByDb userRepository;
+    private final UserRepository userRepository;
 
-    public UserService(UserRepositoryByDb userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

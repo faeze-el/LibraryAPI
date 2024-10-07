@@ -1,5 +1,6 @@
 package Dotin.LibraryProject.repository;
 import Dotin.LibraryProject.entity.User;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -8,8 +9,9 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
+@Profile("ByDb")
 @Repository
-public class UserRepositoryByDb implements UserRepository{
+class UserRepositoryByDb implements UserRepository{
 
     @PersistenceContext
     private EntityManager em;
