@@ -3,7 +3,6 @@ package Dotin.LibraryProject.controller;
 import Dotin.LibraryProject.entity.User;
 import Dotin.LibraryProject.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("users")
-public class userController {
+public class UserController {
     private final UserService service;
 
-    public userController(UserService service) {
+    public UserController(UserService service) {
         this.service = service;
     }
 

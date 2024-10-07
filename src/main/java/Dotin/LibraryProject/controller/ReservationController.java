@@ -4,7 +4,6 @@ import Dotin.LibraryProject.entity.enums.ReservationStatus;
 import Dotin.LibraryProject.entity.ReservationRequest;
 import Dotin.LibraryProject.service.ReservationService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +12,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reservations")
-public class reservationController {
+public class ReservationController {
 
     private final ReservationService service;
 
-    public reservationController(ReservationService service) {
+    public ReservationController(ReservationService service) {
         this.service = service;
     }
 
