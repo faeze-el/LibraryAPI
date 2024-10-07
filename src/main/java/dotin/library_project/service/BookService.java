@@ -2,6 +2,8 @@ package dotin.library_project.service;
 
 import dotin.library_project.entity.Book;
 import dotin.library_project.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
-    public BookService(BookRepository bookRepository) {
+    public BookService(@Qualifier("bookRepositoryByDb") BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 

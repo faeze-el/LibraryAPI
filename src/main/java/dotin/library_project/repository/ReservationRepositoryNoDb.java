@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.*;
 
-@Profile("NoDb")
+@Profile("dev")
 @Repository
-class ReservationRepositoryNoDB implements ReservationRepository{
+class ReservationRepositoryNoDb implements ReservationRepository{
     private List<ReservationRequest> list = new ArrayList<>(Arrays.asList(
             new ReservationRequest(1L, 1L, 1L, randomDate(), randomDate(), ReservationStatus.PENDING_APPROVAL),
             new ReservationRequest(2L, 1L, 3L, randomDate(), randomDate(), ReservationStatus.PENDING_APPROVAL)

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Profile("NoDb")
+@Profile("dev")
 @Repository
-class UserRepositoryNoDB implements UserRepository {
+class UserRepositoryNoDb implements UserRepository {
     private List<User> list = new ArrayList<>(Arrays.asList(
             new User(1L, "User1", "mina", "123456", UserRole.ROLE_ADMIN,true),
             new User(2L, "User2", "ali","123456", UserRole.ROLE_LIBRARIAN,true),

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Repository
-@Profile("NoDb")
+@Profile("dev")
 class BookRepositoryNoDb  implements   BookRepository{
 
     private static final Logger logger = LoggerFactory.getLogger(BookRepositoryNoDb.class);

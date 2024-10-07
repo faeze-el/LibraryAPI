@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Profile("ByDb")
+@Profile("prod")
 @Repository
 class UserRepositoryByDb implements UserRepository{
 

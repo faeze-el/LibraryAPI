@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-@Profile({"ByDb"})
+@Profile({"prod"})
 class BookRepositoryByDb implements BookRepository{
 
     @PersistenceContext

@@ -11,9 +11,9 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Profile("ByDb")
+@Profile("prod")
 @Repository
-class ReservationRepositoryByDB implements ReservationRepository{
+class ReservationRepositoryByDb implements ReservationRepository{
 
     @PersistenceContext
     private EntityManager em;

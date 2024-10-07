@@ -2,6 +2,7 @@ package dotin.library_project.service;
 
 import dotin.library_project.entity.User;
 import dotin.library_project.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(@Qualifier("userRepositoryByDb") UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

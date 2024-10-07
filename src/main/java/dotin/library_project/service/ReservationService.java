@@ -3,6 +3,7 @@ package dotin.library_project.service;
 import dotin.library_project.entity.enums.ReservationStatus;
 import dotin.library_project.entity.ReservationRequest;
 import dotin.library_project.repository.ReservationRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class ReservationService {
 
     private final ReservationRepository reservationRepository;
 
-    public ReservationService(ReservationRepository reservationRepository) {
+    public ReservationService(@Qualifier("reservationRepositoryByDb") ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
     }
 
