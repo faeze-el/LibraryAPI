@@ -1,6 +1,6 @@
-package Dotin.LibraryProject.Entity;
+package Dotin.LibraryProject.entity;
 
-import Dotin.LibraryProject.Entity.Enums.UserRole;
+import Dotin.LibraryProject.entity.enums.UserRole;
 import lombok.*;
 
 import javax.persistence.*;

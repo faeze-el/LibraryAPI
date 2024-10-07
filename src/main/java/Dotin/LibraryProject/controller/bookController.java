@@ -1,17 +1,15 @@
-package Dotin.LibraryProject.Controller;
+package Dotin.LibraryProject.controller;
 
-import Dotin.LibraryProject.Entity.Book;
-import Dotin.LibraryProject.Service.BookService;
+import Dotin.LibraryProject.entity.Book;
+import Dotin.LibraryProject.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/books")

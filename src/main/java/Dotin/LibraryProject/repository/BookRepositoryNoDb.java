@@ -1,7 +1,7 @@
-package Dotin.LibraryProject.Repository;
+package Dotin.LibraryProject.repository;
 
-import Dotin.LibraryProject.Entity.Book;
-import Dotin.LibraryProject.Entity.Enums.BookStatus;
+import Dotin.LibraryProject.entity.Book;
+import Dotin.LibraryProject.entity.enums.BookStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;

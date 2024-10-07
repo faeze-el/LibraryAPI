@@ -1,8 +1,8 @@
-package Dotin.LibraryProject.Controller;
+package Dotin.LibraryProject.controller;
 
-import Dotin.LibraryProject.Entity.Enums.ReservationStatus;
-import Dotin.LibraryProject.Entity.ReservationRequest;
-import Dotin.LibraryProject.Service.ReservationService;
+import Dotin.LibraryProject.entity.enums.ReservationStatus;
+import Dotin.LibraryProject.entity.ReservationRequest;
+import Dotin.LibraryProject.service.ReservationService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

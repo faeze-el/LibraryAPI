@@ -1,8 +1,7 @@
-package Dotin.LibraryProject.Repository;
+package Dotin.LibraryProject.repository;
 
-import Dotin.LibraryProject.Entity.Book;
-import Dotin.LibraryProject.Entity.Enums.ReservationStatus;
-import Dotin.LibraryProject.Entity.ReservationRequest;
+import Dotin.LibraryProject.entity.enums.ReservationStatus;
+import Dotin.LibraryProject.entity.ReservationRequest;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

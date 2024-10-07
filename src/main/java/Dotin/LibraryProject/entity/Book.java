@@ -1,6 +1,6 @@
-package Dotin.LibraryProject.Entity;
+package Dotin.LibraryProject.entity;
 
-import Dotin.LibraryProject.Entity.Enums.BookStatus;
+import Dotin.LibraryProject.entity.enums.BookStatus;
 import lombok.*;
 
 import javax.persistence.Entity;

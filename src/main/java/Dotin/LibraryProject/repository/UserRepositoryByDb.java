@@ -1,5 +1,5 @@
-package Dotin.LibraryProject.Repository;
-import Dotin.LibraryProject.Entity.User;
+package Dotin.LibraryProject.repository;
+import Dotin.LibraryProject.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

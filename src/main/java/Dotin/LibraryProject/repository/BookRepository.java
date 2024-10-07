@@ -1,7 +1,6 @@
-package Dotin.LibraryProject.Repository;
+package Dotin.LibraryProject.repository;
 
-import Dotin.LibraryProject.Entity.Book;
-import org.springframework.data.jpa.repository.JpaRepository;
+import Dotin.LibraryProject.entity.Book;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

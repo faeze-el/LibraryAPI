@@ -1,8 +1,7 @@
-package Dotin.LibraryProject.Service;
+package Dotin.LibraryProject.service;
 
-import Dotin.LibraryProject.Entity.User;
-import Dotin.LibraryProject.Repository.UserRepository;
-import Dotin.LibraryProject.Repository.UserRepositoryByDb;
+import Dotin.LibraryProject.entity.User;
+import Dotin.LibraryProject.repository.UserRepositoryByDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

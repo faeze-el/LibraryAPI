@@ -1,7 +1,7 @@
-package Dotin.LibraryProject.Controller;
+package Dotin.LibraryProject.controller;
 
-import Dotin.LibraryProject.Entity.User;
-import Dotin.LibraryProject.Service.UserService;
+import Dotin.LibraryProject.entity.User;
+import Dotin.LibraryProject.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

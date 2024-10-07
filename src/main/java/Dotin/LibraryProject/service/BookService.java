@@ -1,9 +1,7 @@
-package Dotin.LibraryProject.Service;
+package Dotin.LibraryProject.service;
 
-import Dotin.LibraryProject.Entity.Book;
-import Dotin.LibraryProject.Repository.BookRepository;
-import Dotin.LibraryProject.Repository.BookRepositoryByDb;
-import Dotin.LibraryProject.Repository.BookRepositoryNoDb;
+import Dotin.LibraryProject.entity.Book;
+import Dotin.LibraryProject.repository.BookRepositoryByDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

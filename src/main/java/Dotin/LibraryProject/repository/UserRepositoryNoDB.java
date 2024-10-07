@@ -1,9 +1,7 @@
-package Dotin.LibraryProject.Repository;
+package Dotin.LibraryProject.repository;
 
-import Dotin.LibraryProject.Entity.Enums.UserRole;
-import Dotin.LibraryProject.Entity.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import Dotin.LibraryProject.entity.enums.UserRole;
+import Dotin.LibraryProject.entity.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

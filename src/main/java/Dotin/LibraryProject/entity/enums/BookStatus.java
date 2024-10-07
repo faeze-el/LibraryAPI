@@ -1,4 +1,4 @@
-package Dotin.LibraryProject.Entity.Enums;
+package Dotin.LibraryProject.entity.enums;
 
 public enum BookStatus {
     BOOKABLE,

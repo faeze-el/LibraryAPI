@@ -1,7 +1,7 @@
-package Dotin.LibraryProject.Repository;
+package Dotin.LibraryProject.repository;
 
 
-import Dotin.LibraryProject.Entity.User;
+import Dotin.LibraryProject.entity.User;
 
 import java.util.List;
 

@@ -1,10 +1,8 @@
-package Dotin.LibraryProject.Service;
+package Dotin.LibraryProject.service;
 
-import Dotin.LibraryProject.Entity.Enums.ReservationStatus;
-import Dotin.LibraryProject.Entity.ReservationRequest;
-import Dotin.LibraryProject.Repository.ReservationRepository;
-import Dotin.LibraryProject.Repository.ReservationRepositoryByDB;
-import Dotin.LibraryProject.Repository.ReservationRepositoryNoDB;
+import Dotin.LibraryProject.entity.enums.ReservationStatus;
+import Dotin.LibraryProject.entity.ReservationRequest;
+import Dotin.LibraryProject.repository.ReservationRepositoryNoDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
