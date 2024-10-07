@@ -37,7 +37,7 @@ public class BookRepositoryByDb implements BookRepository{
     public Book getBookByTitle(String title) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.title = :title", Book.class);
         query.setParameter("title", title);
-        return query.getSingleResult();
+        return query.getResultList().get(0);
     }
 
     @Transactional

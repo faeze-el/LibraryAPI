@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public class UserRepositoryNoDB implements UserRepository {
     private List<User> list = new ArrayList<>(Arrays.asList(
-            new User(1L, "User1", "123456", UserRole.READER),
-            new User(2L, "User2", "123456", UserRole.READER),
-            new User(3L, "User3", "123456", UserRole.ADMIN)
+            new User(1L, "User1", "mina", "123456", UserRole.ROLE_ADMIN,true),
+            new User(2L, "User2", "ali","123456", UserRole.ROLE_LIBRARIAN,true),
+            new User(3L, "User3","akbar", "123456", UserRole.ROLE_READER,true)
     ));
     @Override
     public List<User> getAllUsers() {
