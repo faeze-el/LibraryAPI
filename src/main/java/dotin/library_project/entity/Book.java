@@ -2,6 +2,7 @@ package dotin.library_project.entity;
 
 import dotin.library_project.entity.enums.BookStatus;
 import lombok.*;
+import javax.persistence.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,9 @@ public @Data class Book {
     Long bookId;
     String title;
     BookStatus bookStatus = BookStatus.BOOKABLE;
+
+    @OneToOne(mappedBy = "book")
+    private ReservationRequest reservationRequest;
 
     @Override
     public String toString() {

@@ -19,8 +19,8 @@ public @Data class ReservationRequest {
 //    @Column(nullable = false)
 //    Long userId;
 
-    @Column(nullable = false)
-    Long bookId;
+//    @Column(nullable = false)
+//    Long bookId;
 
     @Column(nullable = false)
     LocalDate issueDate;
@@ -30,6 +30,10 @@ public @Data class ReservationRequest {
 
     @Column(nullable = false)
     ReservationStatus reservationStatus = ReservationStatus.PENDING_APPROVAL;
+
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book book;
 
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
@@ -41,7 +45,7 @@ public @Data class ReservationRequest {
         return "Request{" +
                 "requestId='" + requestId + '\'' +
                 ", userId'" + this.user.id + '\'' +
-                ", bookId='" + this.bookId + '\'' +
+                ", bookId='" + this.book.bookId + '\'' +
                 ", issueDate=" + issueDate + '\'' +
                 ", returnDate=" + returnDate + '\'' +
                 ", isApproved=" + reservationStatus +

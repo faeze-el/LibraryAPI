@@ -1,7 +1,9 @@
 package dotin.library_project.repository;
 
+import dotin.library_project.entity.Book;
 import dotin.library_project.entity.ReservationRequest;
 import dotin.library_project.entity.User;
+import dotin.library_project.entity.enums.BookStatus;
 import dotin.library_project.entity.enums.ReservationStatus;
 import dotin.library_project.entity.enums.UserRole;
 import org.springframework.context.annotation.Profile;
@@ -18,9 +20,14 @@ class ReservationRepositoryNoDb implements ReservationRepository{
             new User(2L, "User2", "ali","123456", UserRole.ROLE_LIBRARIAN,true, Collections.emptyList()),
             new User(3L, "User3","akbar", "123456", UserRole.ROLE_READER,true, Collections.emptyList())
     ));
+    private List<Book> booksList = new ArrayList<>(Arrays.asList(
+            new Book(1L, "book1", BookStatus.BOOKABLE, new ReservationRequest()),
+            new Book(2L, "book2", BookStatus.BOOKABLE, new ReservationRequest()),
+            new Book(3L, "book3", BookStatus.BOOKABLE, new ReservationRequest())
+    ));
     private final List<ReservationRequest> list = new ArrayList<>(Arrays.asList(
-            new ReservationRequest(1L, 1L,  randomDate(), randomDate(), ReservationStatus.PENDING_APPROVAL,usersList.get(0) ),
-            new ReservationRequest(2L, 1L,  randomDate(), randomDate(), ReservationStatus.PENDING_APPROVAL, usersList.get(1))
+            new ReservationRequest(1L,   randomDate(), randomDate(), ReservationStatus.PENDING_APPROVAL, booksList.get(0),usersList.get(0) ),
+            new ReservationRequest(2L,   randomDate(), randomDate(), ReservationStatus.PENDING_APPROVAL, booksList.get(1),usersList.get(1))
     ));
 
     public List<ReservationRequest> getAllReservations() {
