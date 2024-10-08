@@ -21,7 +21,8 @@ class BookRepositoryByDb implements BookRepository{
     @Override
     public List<Book> getAllBooks() {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b", Book.class);
-        return query.getResultList();
+        List<Book> books =  query.getResultList();
+        return books;
     }
 
     @Transactional

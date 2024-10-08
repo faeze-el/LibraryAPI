@@ -1,14 +1,18 @@
 package dotin.library_project.controller;
 
 import dotin.library_project.entity.Book;
+import dotin.library_project.entity.dto.BookDto;
 import dotin.library_project.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
@@ -36,8 +40,12 @@ public class BookController {
 
     @PostMapping
     @Operation(summary = "add new book")
-    public ResponseEntity<String> addNewBook(@RequestBody Book book){
-        return  service.addNewBook(book);
+    public ResponseEntity<String> addNewBook(@Valid @RequestBody BookDto bookDto)
+    {
+        Optional<Book> book = Optional.ofNullable(bookDto.toBook());
+        if(book.isPresent())
+            return service.addNewBook(book.get());
+        else return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("{title}")

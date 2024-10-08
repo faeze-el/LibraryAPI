@@ -1,5 +1,6 @@
 package dotin.library_project.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dotin.library_project.entity.enums.UserRole;
 import lombok.*;
 
@@ -25,7 +26,7 @@ public @Data class User {
     Boolean enabled = true;
 
     @OneToMany(targetEntity = ReservationRequest.class, mappedBy = "user")
-//    @JsonManagedReference()
+    @JsonManagedReference(value = "user-reservations")
     private List<ReservationRequest> reservations;
 
     @Override

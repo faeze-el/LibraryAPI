@@ -1,5 +1,6 @@
 package dotin.library_project.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dotin.library_project.entity.enums.ReservationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,13 +32,14 @@ public @Data class ReservationRequest {
     @Column(nullable = false)
     ReservationStatus reservationStatus = ReservationStatus.PENDING_APPROVAL;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
+//    @OneToOne(mappedBy = "reservation_request", fetch = FetchType.LAZY)
+//    private Book book;
 
-    @ManyToOne(targetEntity = User.class, cascade = CascadeType.REMOVE)
+    Long bookId;
+
+    @ManyToOne(targetEntity = User.class, cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
-    //@JsonBackReference()
+    @JsonBackReference(value = "user-reservations")
     private User user;
 
     @Override
@@ -45,7 +47,7 @@ public @Data class ReservationRequest {
         return "Request{" +
                 "requestId='" + requestId + '\'' +
                 ", userId'" + this.user.id + '\'' +
-                ", bookId='" + this.book.bookId + '\'' +
+                ", bookId='" + this.bookId + '\'' +
                 ", issueDate=" + issueDate + '\'' +
                 ", returnDate=" + returnDate + '\'' +
                 ", isApproved=" + reservationStatus +

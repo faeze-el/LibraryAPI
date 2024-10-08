@@ -2,9 +2,7 @@ package dotin.library_project.repository;
 
 import dotin.library_project.entity.Book;
 import dotin.library_project.entity.ReservationRequest;
-import dotin.library_project.entity.User;
 import dotin.library_project.entity.enums.BookStatus;
-import dotin.library_project.entity.enums.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
@@ -20,9 +18,9 @@ class BookRepositoryNoDb  implements   BookRepository{
 
 
     private List<Book> list = new ArrayList<>(Arrays.asList(
-            new Book(1L, "book1", BookStatus.BOOKABLE, new ReservationRequest()),
-            new Book(2L, "book2", BookStatus.BOOKABLE, new ReservationRequest()),
-            new Book(3L, "book3", BookStatus.BOOKABLE, new ReservationRequest())
+            new Book(1L, "book1", BookStatus.BOOKABLE),
+            new Book(2L, "book2", BookStatus.BOOKABLE),
+            new Book(3L, "book3", BookStatus.BOOKABLE)
     ));
 
     public List<Book> getAllBooks() {
@@ -30,7 +28,7 @@ class BookRepositoryNoDb  implements   BookRepository{
     }
 
     public void addBook(Book b) {
-        Book book = new Book((long) list.size()+1, b.getTitle(), b.getBookStatus(), b.getReservationRequest());
+        Book book = new Book((long) list.size()+1, b.getTitle(), b.getBookStatus() );
         list.add(book);
         logger.info("{} is added to the list", b);
     }

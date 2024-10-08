@@ -20,8 +20,9 @@ public @Data class Book {
     String title;
     BookStatus bookStatus = BookStatus.BOOKABLE;
 
-    @OneToOne(mappedBy = "book")
-    private ReservationRequest reservationRequest;
+//    @OneToOne( fetch = FetchType.LAZY)
+//    @JoinColumn(name = "req_id", referencedColumnName = "request_id", nullable = false)
+//    private ReservationRequest reservationRequest;
 
     @Override
     public String toString() {

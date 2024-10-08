@@ -21,13 +21,13 @@ class ReservationRepositoryNoDb implements ReservationRepository{
             new User(3L, "User3","akbar", "123456", UserRole.ROLE_READER,true, Collections.emptyList())
     ));
     private List<Book> booksList = new ArrayList<>(Arrays.asList(
-            new Book(1L, "book1", BookStatus.BOOKABLE, new ReservationRequest()),
-            new Book(2L, "book2", BookStatus.BOOKABLE, new ReservationRequest()),
-            new Book(3L, "book3", BookStatus.BOOKABLE, new ReservationRequest())
+            new Book(1L, "book1", BookStatus.BOOKABLE),
+            new Book(2L, "book2", BookStatus.BOOKABLE),
+            new Book(3L, "book3", BookStatus.BOOKABLE)
     ));
     private final List<ReservationRequest> list = new ArrayList<>(Arrays.asList(
-            new ReservationRequest(1L,   randomDate(), randomDate(), ReservationStatus.PENDING_APPROVAL, booksList.get(0),usersList.get(0) ),
-            new ReservationRequest(2L,   randomDate(), randomDate(), ReservationStatus.PENDING_APPROVAL, booksList.get(1),usersList.get(1))
+            new ReservationRequest(1L,   randomDate(), randomDate(), ReservationStatus.PENDING_APPROVAL,2L,usersList.get(0) ),
+            new ReservationRequest(2L,   randomDate(), randomDate(), ReservationStatus.PENDING_APPROVAL, 3L,usersList.get(1))
     ));
 
     public List<ReservationRequest> getAllReservations() {
