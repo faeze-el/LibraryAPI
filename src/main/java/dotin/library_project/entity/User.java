@@ -19,7 +19,7 @@ public @Data class User {
     String username;
     String name;
     @Column(nullable = false)
-    @Getter(AccessLevel.NONE)
+//    @Getter(AccessLevel.NONE)
     String password;
     @Enumerated(EnumType.STRING)
     UserRole role = UserRole.ROLE_READER;
@@ -28,6 +28,7 @@ public @Data class User {
     @OneToMany(targetEntity = ReservationRequest.class, mappedBy = "user")
     @JsonManagedReference(value = "user-reservations")
     private List<ReservationRequest> reservations;
+
 
     @Override
     public String toString() {
