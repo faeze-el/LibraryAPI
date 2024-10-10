@@ -1,4 +1,4 @@
-package dotin.library_project.controller;
+package dotin.library_project.business.controller;
 
 import dotin.library_project.entity.enums.ReservationStatus;
 import dotin.library_project.entity.ReservationRequest;

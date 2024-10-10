@@ -1,4 +1,4 @@
-package dotin.library_project.controller;
+package dotin.library_project.business.controller;
 
 import dotin.library_project.entity.Book;
 import dotin.library_project.entity.dto.BookDto;

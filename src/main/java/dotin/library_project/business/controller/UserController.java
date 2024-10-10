@@ -1,5 +1,6 @@
-package dotin.library_project.controller;
+package dotin.library_project.business.controller;
 
+import dotin.library_project.business.LogExecutionTime;
 import dotin.library_project.entity.User;
 import dotin.library_project.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,6 +21,7 @@ public class UserController {
 
     @GetMapping
     @Operation(summary = "return list of users")
+    @LogExecutionTime
     public List<User> getUsersList(){
         return service.getUsers();
     }

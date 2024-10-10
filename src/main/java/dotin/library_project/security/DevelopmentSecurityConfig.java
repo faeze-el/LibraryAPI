@@ -28,8 +28,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,10 +44,12 @@ import javax.sql.DataSource;
 @AllArgsConstructor
 public class DevelopmentSecurityConfig {
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .httpBasic().and()
+//                .csrf().disable()
                 //.authorizeHttpRequests().anyRequest().authenticated()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/books").hasRole("ADMIN")
@@ -53,12 +57,12 @@ public class DevelopmentSecurityConfig {
                 .antMatchers(HttpMethod.POST, "/reservations").hasRole("READER")
                 .antMatchers(HttpMethod.GET, "/reservations/{id}").hasRole("READER")
                 .antMatchers(HttpMethod.PUT, "/reservations/**").hasRole("LIBRARIAN")
-                .antMatchers(HttpMethod.GET, "/reservations").hasRole("LIBRARIAN")
                 .antMatchers("/users").hasRole("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .permitAll();
+                .antMatchers(HttpMethod.GET, "/reservations").hasRole("LIBRARIAN")
+                .anyRequest().authenticated();
+//                .and()
+//                .formLogin()
+//                .permitAll();
         return http.build();
     }
 
@@ -72,12 +76,23 @@ public class DevelopmentSecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(appUserService);
-        provider.setPasswordEncoder(passwordEncoder());
-        return provider;
+    public AuthenticationManager configureGlobal(HttpSecurity httpSecurity) throws Exception {
+        AuthenticationManagerBuilder provider = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
+//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.userDetailsService(appUserService).passwordEncoder(passwordEncoder());
+
+        return provider.build();
+
+
     }
+
+//    @Bean
+//    public AuthenticationProvider authenticationProvider(){
+//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+//        provider.setUserDetailsService(appUserService);
+//        provider.setPasswordEncoder(passwordEncoder());
+//        return provider;
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
