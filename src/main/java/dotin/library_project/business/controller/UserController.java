@@ -4,6 +4,7 @@ import dotin.library_project.business.LogExecutionTime;
 import dotin.library_project.entity.User;
 import dotin.library_project.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class UserController {
 
     @PostMapping
     @Operation(summary = "add new user")
+//    @SecurityRequirement(name = "basicAuth")
     public ResponseEntity<String> addNewUser(@RequestBody User user){
         service.addNewUser(user);
         return new ResponseEntity<>("The User added successfully", HttpStatus.CREATED);
