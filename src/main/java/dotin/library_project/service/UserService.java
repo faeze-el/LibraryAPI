@@ -4,6 +4,8 @@ import dotin.library_project.entity.User;
 import dotin.library_project.repository.UserRepository;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,8 +27,19 @@ public class UserService implements UserDetailsService {
         return userRepository.getAllUsers();
     }
 
-    public void addNewUser(User user){
+    public ResponseEntity<String> addNewUser(User user){
         userRepository.addUser(user);
+        return new ResponseEntity<>("The User added successfully", HttpStatus.CREATED);
+    }
+
+    public User getUserByUserName(String userName) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.getUserByUserName(userName);
+        if (user.isPresent()) {
+            return user.get();
+        }
+        else{
+            throw new UsernameNotFoundException(userName);
+        }
     }
 
     @Override
