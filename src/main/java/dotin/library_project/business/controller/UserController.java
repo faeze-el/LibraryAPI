@@ -1,7 +1,9 @@
 package dotin.library_project.business.controller;
 
 import dotin.library_project.business.LogExecutionTime;
+import dotin.library_project.entity.Book;
 import dotin.library_project.entity.User;
+import dotin.library_project.entity.dto.UserDto;
 import dotin.library_project.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -9,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("users")
@@ -29,9 +33,15 @@ public class UserController {
 
     @PostMapping
     @Operation(summary = "add new user")
-//    @SecurityRequirement(name = "basicAuth")
-    public ResponseEntity<String> addNewUser(@RequestBody User user){
-        service.addNewUser(user);
-        return new ResponseEntity<>("The User added successfully", HttpStatus.CREATED);
+    public ResponseEntity<?> addNewUser(@Valid @RequestBody UserDto userdto){
+        try {
+            Optional<User> user = Optional.ofNullable(userdto.toUser());
+            if(user.isPresent())
+                return service.addNewUser(user.get());
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
     }
 }
