@@ -15,4 +15,5 @@ public interface UserRepository {
     public void addUser(User user);
     public Optional<User> getUserByUserName(String username);
     public List<GrantedAuthority> getGrantedAuthorities(User u);
+
 }

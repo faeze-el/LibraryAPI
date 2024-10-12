@@ -3,10 +3,11 @@ package dotin.library_project.service;
 import dotin.library_project.entity.User;
 import dotin.library_project.repository.UserRepository;
 import lombok.var;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -53,5 +54,21 @@ public class UserService implements UserDetailsService {
         else{
             throw new UsernameNotFoundException(username);
         }
+    }
+
+    public User getUserFromSecurityContext(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String username = userDetails.getUsername();
+            Optional<User> user = userRepository.getUserByUserName(username);
+            if (user.isPresent()) {
+                return user.get();
+            }
+            else{
+                throw new UsernameNotFoundException(username);
+            }
+        }
+        return null;
     }
 }
