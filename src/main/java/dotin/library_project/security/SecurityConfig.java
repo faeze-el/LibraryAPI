@@ -42,22 +42,23 @@ import javax.sql.DataSource;
 
 @Configuration
 @AllArgsConstructor
-public class DevelopmentSecurityConfig {
+public class SecurityConfig {
 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .httpBasic().and()
-//                .csrf().disable()
+                .csrf().disable()
                 //.authorizeHttpRequests().anyRequest().authenticated()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/books").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/books/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/books/**").hasRole("ADMIN")
+                .antMatchers("/users").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/reservations").hasRole("READER")
                 .antMatchers(HttpMethod.GET, "/reservations/{id}").hasRole("READER")
                 .antMatchers(HttpMethod.PUT, "/reservations/**").hasRole("LIBRARIAN")
-                .antMatchers("/users").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/reservations").hasRole("LIBRARIAN")
                 .anyRequest().authenticated();
 //                .and()

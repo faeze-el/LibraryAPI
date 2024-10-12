@@ -1,12 +1,15 @@
 package dotin.library_project.service;
 
 import dotin.library_project.entity.Book;
+import dotin.library_project.entity.validator.BookValidator;
 import dotin.library_project.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.Errors;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -17,8 +20,10 @@ import java.util.Objects;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final BookValidator validator =new BookValidator();
 
-    public BookService(@Qualifier("bookRepositoryByDb") BookRepository bookRepository) {
+
+    public BookService(@Qualifier("bookRepositoryByDb") BookRepository bookRepository ) {
         this.bookRepository = bookRepository;
     }
 
@@ -28,7 +33,13 @@ public class BookService {
             return new ResponseEntity<>(books, HttpStatus.OK);
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
     }
-    public ResponseEntity<String> addNewBook(Book b) {
+    public ResponseEntity<?> addNewBook(Book b) {
+
+        Errors errors = new BeanPropertyBindingResult(b, "book");
+        validator.validate(b, errors, "create");
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(errors.getAllErrors());
+        }
         bookRepository.addBook(b);
         return new ResponseEntity<>("Book added successfully", HttpStatus.CREATED);
     }
