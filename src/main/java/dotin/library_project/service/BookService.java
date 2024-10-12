@@ -20,7 +20,6 @@ import java.util.Objects;
 public class BookService {
 
     private final BookRepository bookRepository;
-    private final BookValidator validator =new BookValidator();
 
 
     public BookService(@Qualifier("bookRepositoryByDb") BookRepository bookRepository ) {
