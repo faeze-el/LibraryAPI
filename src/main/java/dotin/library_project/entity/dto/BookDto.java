@@ -17,14 +17,14 @@ public class BookDto {
     private String title;
 
     @NotNull(message = "Status cannot be null")
-    private String status;
+    private String bookStatus;
 
     public Book toBook() {
         Book b = new Book();
         b.setTitle(title);
-        status = status.trim().toUpperCase();
-        if(BookStatus.isValidEnum(status))
-            b.setBookStatus(BookStatus.valueOf(status));
+        bookStatus = bookStatus.trim().toUpperCase();
+        if(BookStatus.isValidEnum(bookStatus))
+            b.setBookStatus(BookStatus.valueOf(bookStatus));
         else return null;
         return b;
     }

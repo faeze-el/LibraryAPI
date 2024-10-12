@@ -40,18 +40,17 @@ public class BookController {
 
     @PostMapping
     @Operation(summary = "add new book")
-    public ResponseEntity<?> addNewBook(@RequestBody Book book)
+    public ResponseEntity<?> addNewBook(@Valid @RequestBody BookDto bookdto)
     {
-        return service.addNewBook(book);
-//        try {
-//            //Optional<Book> book = Optional.ofNullable(bookDto.toBook());
-//            //if(book.isPresent())
-//            return service.addNewBook(book);
-//        }
-//        catch (Exception e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-        //else return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
+        try {
+            Optional<Book> book = Optional.ofNullable(bookdto.toBook());
+            if(book.isPresent())
+                return service.addNewBook(book.get());
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("{title}")

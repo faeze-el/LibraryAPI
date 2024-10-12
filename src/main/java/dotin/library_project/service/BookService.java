@@ -34,12 +34,6 @@ public class BookService {
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
     }
     public ResponseEntity<?> addNewBook(Book b) {
-
-        Errors errors = new BeanPropertyBindingResult(b, "book");
-        validator.validate(b, errors, "create");
-        if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors.getAllErrors());
-        }
         bookRepository.addBook(b);
         return new ResponseEntity<>("Book added successfully", HttpStatus.CREATED);
     }
