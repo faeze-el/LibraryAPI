@@ -1,4 +1,4 @@
-package dotin.library_project.business;
+package dotin.library_project.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

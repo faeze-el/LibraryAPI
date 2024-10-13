@@ -1,8 +1,7 @@
 package dotin.library_project.repository;
 
-import dotin.library_project.entity.Book;
-import dotin.library_project.entity.ReservationRequest;
-import dotin.library_project.entity.enums.BookStatus;
+import dotin.library_project.data.Book;
+import dotin.library_project.data.enums.BookStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;

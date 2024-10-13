@@ -1,6 +1,6 @@
-package dotin.library_project.entity.dto;
+package dotin.library_project.data.dto;
 
-import dotin.library_project.entity.User;
+import dotin.library_project.data.User;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;

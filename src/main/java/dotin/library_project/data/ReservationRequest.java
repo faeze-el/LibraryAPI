@@ -1,7 +1,7 @@
-package dotin.library_project.entity;
+package dotin.library_project.data;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import dotin.library_project.entity.enums.ReservationStatus;
+import dotin.library_project.data.enums.ReservationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

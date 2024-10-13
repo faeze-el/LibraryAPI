@@ -1,6 +1,6 @@
 package dotin.library_project.repository;
 
-import dotin.library_project.entity.Book;
+import dotin.library_project.data.Book;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

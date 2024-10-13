@@ -1,11 +1,9 @@
 package dotin.library_project.repository;
 
-import dotin.library_project.entity.ReservationRequest;
-import dotin.library_project.entity.enums.UserRole;
-import dotin.library_project.entity.User;
+import dotin.library_project.data.enums.UserRole;
+import dotin.library_project.data.User;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;

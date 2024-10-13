@@ -1,7 +1,7 @@
-package dotin.library_project.entity;
+package dotin.library_project.data;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import dotin.library_project.entity.enums.UserRole;
+import dotin.library_project.data.enums.UserRole;
 import lombok.*;
 
 import javax.persistence.*;

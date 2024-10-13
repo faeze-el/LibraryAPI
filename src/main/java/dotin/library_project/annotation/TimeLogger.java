@@ -1,4 +1,4 @@
-package dotin.library_project.business;
+package dotin.library_project.annotation;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class TimeLogger {
     private Logger logger = LoggerFactory.getLogger(TimeLogger.class);
 
-    @Around("@annotation(dotin.library_project.business.LogExecutionTime)")
+    @Around("@annotation(dotin.library_project.annotation.LogExecutionTime)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         Object proceed = joinPoint.proceed();

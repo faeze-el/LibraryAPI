@@ -1,15 +1,12 @@
-package dotin.library_project.entity.dto;
+package dotin.library_project.data.dto;
 
 import dotin.library_project.annotation.DateAfter;
-import dotin.library_project.entity.ReservationRequest;
-import dotin.library_project.entity.User;
+import dotin.library_project.data.ReservationRequest;
+import dotin.library_project.data.User;
 import lombok.Data;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 
 @DateAfter(startDate = "issueDate", endDate = "returnDate", message = "End date must be after start date")

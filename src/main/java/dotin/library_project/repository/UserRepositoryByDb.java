@@ -1,8 +1,6 @@
 package dotin.library_project.repository;
-import dotin.library_project.entity.User;
-import dotin.library_project.entity.enums.UserRole;
+import dotin.library_project.data.User;
 import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Repository;
@@ -11,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;

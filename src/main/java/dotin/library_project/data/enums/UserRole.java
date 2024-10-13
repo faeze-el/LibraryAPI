@@ -1,4 +1,4 @@
-package dotin.library_project.entity.enums;
+package dotin.library_project.data.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

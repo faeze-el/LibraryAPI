@@ -1,12 +1,11 @@
-package dotin.library_project.business.controller;
+package dotin.library_project.web;
 
-import dotin.library_project.entity.User;
-import dotin.library_project.entity.dto.ReservationRequestDto;
-import dotin.library_project.entity.dto.UserDto;
-import dotin.library_project.entity.enums.ReservationStatus;
-import dotin.library_project.entity.ReservationRequest;
-import dotin.library_project.service.ReservationService;
-import dotin.library_project.service.UserService;
+import dotin.library_project.data.User;
+import dotin.library_project.data.dto.ReservationRequestDto;
+import dotin.library_project.data.enums.ReservationStatus;
+import dotin.library_project.data.ReservationRequest;
+import dotin.library_project.business.ReservationService;
+import dotin.library_project.business.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

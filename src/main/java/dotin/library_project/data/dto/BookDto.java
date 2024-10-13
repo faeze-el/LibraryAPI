@@ -1,9 +1,10 @@
-package dotin.library_project.entity.dto;
+package dotin.library_project.data.dto;
 
-import dotin.library_project.entity.Book;
-import dotin.library_project.entity.enums.BookStatus;
+import dotin.library_project.data.Book;
+import dotin.library_project.data.enums.BookStatus;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,11 +14,11 @@ public class BookDto {
 
     @NotNull(message = "The title is required.")
     @NotEmpty(message = "The title can not be empty.")
+    @NotBlank
     @Size(min=2, max=50, message = "The book title must be between 2 and 50 characters")
     private String title;
 
-    @NotNull(message = "Status cannot be null")
-    private String bookStatus;
+    private String bookStatus = BookStatus.BOOKABLE.toString();
 
     public Book toBook() {
         Book b = new Book();

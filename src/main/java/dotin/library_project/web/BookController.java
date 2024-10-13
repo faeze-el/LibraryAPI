@@ -1,8 +1,8 @@
-package dotin.library_project.business.controller;
+package dotin.library_project.web;
 
-import dotin.library_project.entity.Book;
-import dotin.library_project.entity.dto.BookDto;
-import dotin.library_project.service.BookService;
+import dotin.library_project.data.Book;
+import dotin.library_project.data.dto.BookDto;
+import dotin.library_project.business.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,15 +42,7 @@ public class BookController {
     @Operation(summary = "add new book")
     public ResponseEntity<?> addNewBook(@Valid @RequestBody BookDto bookdto)
     {
-        try {
-            Optional<Book> book = Optional.ofNullable(bookdto.toBook());
-            if(book.isPresent())
-                return service.addNewBook(book.get());
-        }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
+        return service.addNewBook(bookdto);
     }
 
     @DeleteMapping("{title}")

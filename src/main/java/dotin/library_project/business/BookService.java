@@ -1,6 +1,7 @@
-package dotin.library_project.service;
+package dotin.library_project.business;
 
-import dotin.library_project.entity.Book;
+import dotin.library_project.data.Book;
+import dotin.library_project.data.dto.BookDto;
 import dotin.library_project.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -28,9 +30,18 @@ public class BookService {
             return new ResponseEntity<>(books, HttpStatus.OK);
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
     }
-    public ResponseEntity<?> addNewBook(Book b) {
-        bookRepository.addBook(b);
-        return new ResponseEntity<>("Book added successfully", HttpStatus.CREATED);
+    public ResponseEntity<?> addNewBook(BookDto bookdto) {
+        try {
+            Optional<Book> book = Optional.ofNullable(bookdto.toBook());
+            if(book.isPresent()) {
+                bookRepository.addBook(book.get());
+                return new ResponseEntity<>("Book added successfully", HttpStatus.CREATED);
+            }
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
     }
     public ResponseEntity<Book> getBookById(Long id) {
         final Book result =  bookRepository.getBookById(id);

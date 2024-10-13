@@ -1,4 +1,4 @@
-package dotin.library_project.entity.enums;
+package dotin.library_project.data.enums;
 
 public enum ReservationStatus {
     PENDING_APPROVAL,
