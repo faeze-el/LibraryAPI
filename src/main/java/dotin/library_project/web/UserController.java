@@ -32,14 +32,6 @@ public class UserController {
     @PostMapping
     @Operation(summary = "add new user")
     public ResponseEntity<?> addNewUser(@Valid @RequestBody UserDto userdto){
-        try {
-            Optional<User> user = Optional.ofNullable(userdto.toUser());
-            if(user.isPresent())
-                return service.addNewUser(user.get());
-        }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
+        return service.addNewUser(userdto);
     }
 }

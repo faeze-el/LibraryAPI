@@ -1,6 +1,7 @@
 package dotin.library_project.business;
 
 import dotin.library_project.data.User;
+import dotin.library_project.data.dto.UserDto;
 import dotin.library_project.repository.UserRepository;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,10 +34,24 @@ public class UserService implements UserDetailsService {
         return userRepository.getAllUsers();
     }
 
-    public ResponseEntity<?> addNewUser(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.addUser(user);
-        return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
+    public ResponseEntity<?> addNewUser(UserDto userdto){
+
+        try {
+            Optional<User> userObj = Optional.ofNullable(userdto.toUser());
+            if(userObj.isPresent()){
+                User user = userObj.get();
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                userRepository.addUser(user);
+                return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
+            }
+
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
+
+
     }
 
     @Override

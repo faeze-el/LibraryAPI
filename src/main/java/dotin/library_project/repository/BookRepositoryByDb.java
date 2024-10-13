@@ -2,6 +2,7 @@ package dotin.library_project.repository;
 
 
 import dotin.library_project.data.Book;
+import dotin.library_project.data.enums.BookStatus;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -53,5 +54,15 @@ class BookRepositoryByDb implements BookRepository{
             isRemove = true;
         }
         return isRemove;
+    }
+
+    @Transactional
+    @Override
+    public void updateStatusById(Long id, BookStatus status) {
+        Book book = getBookById(id);
+        if(book!=null){
+            book.setBookStatus(status);
+            em.merge(book);
+        }
     }
 }

@@ -2,9 +2,12 @@ package dotin.library_project.business;
 
 import dotin.library_project.data.User;
 import dotin.library_project.data.dto.ReservationRequestDto;
+import dotin.library_project.data.enums.BookStatus;
 import dotin.library_project.data.enums.ReservationStatus;
 import dotin.library_project.data.ReservationRequest;
+import dotin.library_project.repository.BookRepository;
 import dotin.library_project.repository.ReservationRepository;
+import dotin.library_project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +21,12 @@ import java.util.Optional;
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
+//    private final UserRepository userRepository;
+    private final BookRepository bookRepository;
 
-    public ReservationService(@Qualifier("reservationRepositoryByDb") ReservationRepository reservationRepository) {
+    public ReservationService(@Qualifier("reservationRepositoryByDb") ReservationRepository reservationRepository, @Qualifier("bookRepositoryByDb") BookRepository bookRepository) {
         this.reservationRepository = reservationRepository;
+        this.bookRepository = bookRepository;
     }
 
     public List<ReservationRequest> getReservationRequestList() {
@@ -53,6 +59,7 @@ public class ReservationService {
         ReservationRequest req = reservationRepository.getReservationsById(id);
         if(Objects.nonNull(req)) {
             boolean flag = reservationRepository.updateReservation(id, status);
+            if (flag) bookRepository.updateStatusById(req.getBookId(), status== ReservationStatus.APPROVED? BookStatus.NOT_BOOKABLE : BookStatus.BOOKABLE);
             return new ResponseEntity<>( flag ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>("Can not find this id", HttpStatus.NOT_FOUND);

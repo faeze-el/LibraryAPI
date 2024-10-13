@@ -2,6 +2,7 @@ package dotin.library_project.repository;
 
 import dotin.library_project.data.Book;
 import dotin.library_project.data.enums.BookStatus;
+import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
@@ -50,5 +51,14 @@ class BookRepositoryNoDb  implements   BookRepository{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void updateStatusById(Long id, BookStatus status) {
+
+        for(Book b : list){
+            if (b.getBookId() == id) b.setBookStatus(status);
+        }
+
     }
 }
