@@ -2,6 +2,7 @@ package dotin.library_project.repository;
 
 import dotin.library_project.data.enums.ReservationStatus;
 import dotin.library_project.data.ReservationRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

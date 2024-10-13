@@ -3,6 +3,7 @@ package dotin.library_project.repository;
 import dotin.library_project.data.enums.ReservationStatus;
 import dotin.library_project.data.ReservationRequest;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -26,9 +27,11 @@ class ReservationRepositoryByDb implements ReservationRepository{
 
     @Override
     public ReservationRequest getReservationsById(Long id) {
-        TypedQuery<ReservationRequest> query = em.createQuery("SELECT r FROM ReservationRequest r WHERE r.userId = :userId", ReservationRequest.class);
-        query.setParameter("userId", id);
-        return query.getSingleResult();
+        TypedQuery<ReservationRequest> query = em.createQuery("SELECT r FROM ReservationRequest r WHERE r.id = :id", ReservationRequest.class);
+        query.setParameter("id", id);
+        List<ReservationRequest> rs = query.getResultList();
+        if(rs.isEmpty()) return null;
+        return rs.get(0);
     }
 
     @Transactional

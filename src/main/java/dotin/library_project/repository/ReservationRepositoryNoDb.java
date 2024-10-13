@@ -7,6 +7,7 @@ import dotin.library_project.data.enums.BookStatus;
 import dotin.library_project.data.enums.ReservationStatus;
 import dotin.library_project.data.enums.UserRole;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;

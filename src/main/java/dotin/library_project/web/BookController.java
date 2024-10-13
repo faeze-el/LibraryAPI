@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +37,7 @@ public class BookController {
 
     @GetMapping("{id}")
     @Operation(summary = "return a book by id given or null if not found")
-    public ResponseEntity<Book> getBookByID(@PathVariable Long id){
+    public ResponseEntity<?> getBookByID( @PathVariable  Long id){
         return service.getBookById(id);
     }
 

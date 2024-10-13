@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -43,12 +44,14 @@ public class BookService {
         }
         return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
     }
-    public ResponseEntity<Book> getBookById(Long id) {
+    public ResponseEntity<?> getBookById(Long id) {
+        if (id<=0) return new ResponseEntity<>("Enter a positive Id.",HttpStatus.BAD_REQUEST);
         final Book result =  bookRepository.getBookById(id);
         return new ResponseEntity<>(result, Objects.nonNull(result) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
     @Transactional
-    public ResponseEntity<String> removeBookByTitle(String title) {
+    public ResponseEntity<String> removeBookByTitle( String title) {
+        if (Objects.isNull(title) || title.isEmpty()) return new ResponseEntity<>("Enter a valid title.",HttpStatus.BAD_REQUEST);
         boolean flag =  bookRepository.removeBookByTitle(title);
         if(flag)
             return new ResponseEntity<>( "Book removed", HttpStatus.OK );

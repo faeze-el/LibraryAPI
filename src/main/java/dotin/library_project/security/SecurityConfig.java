@@ -49,7 +49,7 @@ public class SecurityConfig {
                 .antMatchers("/users").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/reservations").hasRole("READER")
-                .antMatchers(HttpMethod.GET, "/reservations/{id}").hasRole("READER")
+//                .antMatchers(HttpMethod.GET, "/reservations/{id}").hasAnyRole("READER","LIBRARIAN")
                 .antMatchers(HttpMethod.PUT, "/reservations/**").hasRole("LIBRARIAN")
                 .antMatchers(HttpMethod.GET, "/reservations").hasRole("LIBRARIAN")
                 .anyRequest().authenticated();

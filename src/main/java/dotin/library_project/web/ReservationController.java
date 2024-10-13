@@ -37,28 +37,18 @@ public class ReservationController {
     @Operation(summary = "add new reservation request")
     public ResponseEntity<?> addNewReservation(@Valid @RequestBody ReservationRequestDto reqdto) {
         User user = userService.getUserFromSecurityContext();
-        try {
-            Optional<ReservationRequest> request = Optional.ofNullable(reqdto.toReservationRequest(user));
-            if(request.isPresent())
-                return service.addNewReservation(request.get());
-        }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
+        return service.addNewReservation(reqdto, user);
     }
 
     @GetMapping("{id}")
-    @Operation(summary = "return reservation requests by user_id given")
-    public ResponseEntity< ReservationRequest> getReservationsByUserId(@PathVariable Long id){
-        ReservationRequest res = service.getReservationsByUserId(id);
-        return new ResponseEntity<>(res, res==null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    @Operation(summary = "return reservation request by id given")
+    public ResponseEntity< ?> getReservationsById(@PathVariable Long id){
+        return service.getReservationsById(id);
     }
 
     @PutMapping("{requestId}")
     @Operation(summary = "reject or approve a request")
-    public ResponseEntity<String> updateReservationByRequestId(@PathVariable Long requestId, @RequestParam("status") ReservationStatus status){
-        boolean flag = service.updateReservation(requestId, status);
-        return new ResponseEntity<>(flag ?"The request update successfully": "Can not find the request!!", flag ? HttpStatus.CREATED : HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> updateReservationByRequestId(@PathVariable Long requestId, @RequestParam("status") ReservationStatus status){
+        return service.updateReservation(requestId, status);
     }
 }
