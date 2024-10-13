@@ -28,10 +28,7 @@ public class ReservationRequestDto {
 //    @NotEmpty
     private Long bookId;
 
-    @Valid
-    private User user;
-
-    public ReservationRequest toReservationRequest() {
+    public ReservationRequest toReservationRequest(User user) {
         ReservationRequest r = new ReservationRequest();
         r.setIssueDate(issueDate);
         r.setReturnDate(returnDate);

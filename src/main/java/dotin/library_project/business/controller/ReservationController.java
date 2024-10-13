@@ -38,9 +38,8 @@ public class ReservationController {
     @Operation(summary = "add new reservation request")
     public ResponseEntity<?> addNewReservation(@Valid @RequestBody ReservationRequestDto reqdto) {
         User user = userService.getUserFromSecurityContext();
-        reqdto.setUser(user);
         try {
-            Optional<ReservationRequest> request = Optional.ofNullable(reqdto.toReservationRequest());
+            Optional<ReservationRequest> request = Optional.ofNullable(reqdto.toReservationRequest(user));
             if(request.isPresent())
                 return service.addNewReservation(request.get());
         }
