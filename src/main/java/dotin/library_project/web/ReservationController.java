@@ -8,6 +8,8 @@ import dotin.library_project.business.ReservationService;
 import dotin.library_project.business.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +29,14 @@ public class ReservationController {
         this.service = service;
     }
 
+    @PostAuthorize("hasRole('ADMIN') or hasRole('LIBRARIAN')")
     @GetMapping
     @Operation(summary = "return list of reservation requests")
     public List<ReservationRequest> getRequestsList(){
         return service.getReservationRequestList();
     }
 
+    @PreAuthorize("hasRole('READER')")
     @PostMapping
     @Operation(summary = "add new reservation request")
     public ResponseEntity<?> addNewReservation(@Valid @RequestBody ReservationRequestDto reqdto) {
@@ -40,12 +44,15 @@ public class ReservationController {
         return service.addNewReservation(reqdto, user);
     }
 
+    @PreAuthorize("hasRole('READER')")
     @GetMapping("{id}")
     @Operation(summary = "return reservation request by id given")
     public ResponseEntity< ?> getReservationsById(@Valid @PathVariable Long id){
+
         return service.getReservationsById(id);
     }
 
+    @PreAuthorize("hasRole('LIBRARIAN')")
     @PutMapping("{requestId}")
     @Operation(summary = "reject or approve a request")
     public ResponseEntity<?> updateReservationByRequestId(@Valid @PathVariable Long requestId,@Valid @RequestParam("status") ReservationStatus status){

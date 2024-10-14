@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +39,7 @@ public class BookController {
         return service.getBookById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     @Operation(summary = "add new book")
     public ResponseEntity<?> addNewBook(@Valid @RequestBody BookDto bookdto)
@@ -45,6 +47,7 @@ public class BookController {
         return service.addNewBook(bookdto);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("{title}")
     @Operation(summary = "remove a book by title")
      public ResponseEntity<String> removeBook(@Valid @PathVariable String title) {
