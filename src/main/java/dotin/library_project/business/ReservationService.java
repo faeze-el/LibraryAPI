@@ -1,13 +1,12 @@
 package dotin.library_project.business;
 
-import dotin.library_project.data.User;
+import dotin.library_project.data.entity.User;
 import dotin.library_project.data.dto.ReservationRequestDto;
 import dotin.library_project.data.enums.BookStatus;
 import dotin.library_project.data.enums.ReservationStatus;
-import dotin.library_project.data.ReservationRequest;
+import dotin.library_project.data.entity.ReservationRequest;
 import dotin.library_project.repository.BookRepository;
 import dotin.library_project.repository.ReservationRepository;
-import dotin.library_project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

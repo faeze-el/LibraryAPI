@@ -1,4 +1,4 @@
-package dotin.library_project.data;
+package dotin.library_project.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dotin.library_project.data.enums.UserRole;

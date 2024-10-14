@@ -1,21 +1,16 @@
 package dotin.library_project.web;
 
-import dotin.library_project.data.Book;
+import dotin.library_project.data.entity.Book;
 import dotin.library_project.data.dto.BookDto;
 import dotin.library_project.business.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Positive;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")

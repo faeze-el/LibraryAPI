@@ -1,13 +1,12 @@
 package dotin.library_project.repository;
 
-import dotin.library_project.data.Book;
-import dotin.library_project.data.ReservationRequest;
-import dotin.library_project.data.User;
+import dotin.library_project.data.entity.Book;
+import dotin.library_project.data.entity.ReservationRequest;
+import dotin.library_project.data.entity.User;
 import dotin.library_project.data.enums.BookStatus;
 import dotin.library_project.data.enums.ReservationStatus;
 import dotin.library_project.data.enums.UserRole;
 import org.springframework.context.annotation.Profile;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;

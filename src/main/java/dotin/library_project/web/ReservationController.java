@@ -1,19 +1,17 @@
 package dotin.library_project.web;
 
-import dotin.library_project.data.User;
+import dotin.library_project.data.entity.User;
 import dotin.library_project.data.dto.ReservationRequestDto;
 import dotin.library_project.data.enums.ReservationStatus;
-import dotin.library_project.data.ReservationRequest;
+import dotin.library_project.data.entity.ReservationRequest;
 import dotin.library_project.business.ReservationService;
 import dotin.library_project.business.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/reservations")

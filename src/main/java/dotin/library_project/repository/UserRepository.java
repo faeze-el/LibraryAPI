@@ -1,7 +1,7 @@
 package dotin.library_project.repository;
 
 
-import dotin.library_project.data.User;
+import dotin.library_project.data.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Repository;
 

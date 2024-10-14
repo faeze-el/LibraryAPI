@@ -1,6 +1,6 @@
 package dotin.library_project.business;
 
-import dotin.library_project.data.User;
+import dotin.library_project.data.entity.User;
 import dotin.library_project.data.dto.UserDto;
 import dotin.library_project.repository.UserRepository;
 import lombok.var;

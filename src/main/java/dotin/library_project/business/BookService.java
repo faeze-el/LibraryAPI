@@ -1,6 +1,6 @@
 package dotin.library_project.business;
 
-import dotin.library_project.data.Book;
+import dotin.library_project.data.entity.Book;
 import dotin.library_project.data.dto.BookDto;
 import dotin.library_project.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
