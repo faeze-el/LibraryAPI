@@ -45,11 +45,11 @@ public class ReservationController {
     }
 
     @PreAuthorize("hasRole('READER')")
-    @GetMapping("{id}")
+    @GetMapping("reservation")
     @Operation(summary = "return reservation request by id given")
-    public ResponseEntity< ?> getReservationsById(@Valid @PathVariable Long id){
-
-        return service.getReservationsById(id);
+    public ResponseEntity< ?> getReservationsUser(){
+        User user = userService.getUserFromSecurityContext();
+        return service.getReservationsByUserId(user.getId());
     }
 
     @PreAuthorize("hasRole('LIBRARIAN')")

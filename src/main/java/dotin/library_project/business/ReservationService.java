@@ -31,9 +31,9 @@ public class ReservationService {
     public List<ReservationRequest> getReservationRequestList() {
         return reservationRepository.getAllReservations();
     }
-    public ResponseEntity<?> getReservationsById(Long id) {
-        if (id<=0) return new ResponseEntity<>("Enter a positive Id.",HttpStatus.BAD_REQUEST);
-        ReservationRequest req = reservationRepository.getReservationsById(id);
+    public ResponseEntity<?> getReservationsByUserId(Long userId) {
+        if (userId<=0) return new ResponseEntity<>("Enter a positive Id.",HttpStatus.BAD_REQUEST);
+        ReservationRequest req = reservationRepository.getReservationsByUserId(userId);
         if(Objects.nonNull(req)) {
             return new ResponseEntity<>(req,HttpStatus.OK);
         }
@@ -44,7 +44,7 @@ public class ReservationService {
             Optional<ReservationRequest> request = Optional.ofNullable(reqdto.toReservationRequest(user));
             if(request.isPresent()) {
                 reservationRepository.addReservation(request.get());
-                new ResponseEntity<>("Reservation request added successfully", HttpStatus.CREATED);
+                return new ResponseEntity<>("Reservation request added successfully", HttpStatus.CREATED);
             }
         }
         catch (Exception e) {

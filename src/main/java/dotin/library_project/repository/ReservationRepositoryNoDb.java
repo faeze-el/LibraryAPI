@@ -35,7 +35,13 @@ class ReservationRepositoryNoDb implements ReservationRepository{
     }
     public ReservationRequest getReservationsById(Long id){
         for(ReservationRequest r : list){
-            if(Objects.equals(r.getUser().getId(), id)) return r;
+            if(Objects.equals(r.getRequestId(), id)) return r;
+        }
+        return null;
+    }
+    public ReservationRequest getReservationsByUserId(Long userId){
+        for(ReservationRequest r : list){
+            if(Objects.equals(r.getUser().getId(), userId)) return r;
         }
         return null;
     }

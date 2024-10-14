@@ -33,6 +33,15 @@ class ReservationRepositoryByDb implements ReservationRepository{
         return rs.get(0);
     }
 
+    @Override
+    public ReservationRequest getReservationsByUserId(Long userId) {
+        TypedQuery<ReservationRequest> query = em.createQuery("SELECT r FROM ReservationRequest r WHERE r.user.id = :userId", ReservationRequest.class);
+        query.setParameter("userId", userId);
+        List<ReservationRequest> rs = query.getResultList();
+        if(rs.isEmpty()) return null;
+        return rs.get(0);
+    }
+
     @Transactional
     @Override
     public void addReservation(ReservationRequest reservation) {
