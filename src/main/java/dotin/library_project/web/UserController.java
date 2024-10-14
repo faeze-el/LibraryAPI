@@ -6,11 +6,13 @@ import dotin.library_project.data.dto.UserDto;
 import dotin.library_project.business.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("users")
 public class UserController {

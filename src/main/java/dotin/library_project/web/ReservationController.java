@@ -8,11 +8,13 @@ import dotin.library_project.business.ReservationService;
 import dotin.library_project.business.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/reservations")
 public class ReservationController {
@@ -40,13 +42,13 @@ public class ReservationController {
 
     @GetMapping("{id}")
     @Operation(summary = "return reservation request by id given")
-    public ResponseEntity< ?> getReservationsById(@PathVariable Long id){
+    public ResponseEntity< ?> getReservationsById(@Valid @PathVariable Long id){
         return service.getReservationsById(id);
     }
 
     @PutMapping("{requestId}")
     @Operation(summary = "reject or approve a request")
-    public ResponseEntity<?> updateReservationByRequestId(@PathVariable Long requestId, @RequestParam("status") ReservationStatus status){
+    public ResponseEntity<?> updateReservationByRequestId(@Valid @PathVariable Long requestId,@Valid @RequestParam("status") ReservationStatus status){
         return service.updateReservation(requestId, status);
     }
 }
