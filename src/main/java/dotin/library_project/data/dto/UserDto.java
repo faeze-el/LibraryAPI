@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Optional;
 
 @Data
 public class UserDto {
@@ -24,12 +25,12 @@ public class UserDto {
     private String password;
 
 
-    public User toUser() {
+    public Optional<User> toUser() {
         User u = new User();
         u.setUsername(userName);
         u.setName(name);
         u.setPassword(password);
-        return u;
+        return Optional.of(u);
     }
 
 }

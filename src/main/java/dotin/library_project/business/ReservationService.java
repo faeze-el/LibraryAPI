@@ -41,16 +41,14 @@ public class ReservationService {
     }
     public ResponseEntity<?> addNewReservation(ReservationRequestDto reqdto, User user) {
         try {
-            Optional<ReservationRequest> request = Optional.ofNullable(reqdto.toReservationRequest(user));
-            if(request.isPresent()) {
+            Optional<ReservationRequest> request = reqdto.toReservationRequest(user);
                 reservationRepository.addReservation(request.get());
                 return new ResponseEntity<>("Reservation request added successfully", HttpStatus.CREATED);
-            }
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
+//        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
     }
     public ResponseEntity<?> updateReservation(Long id, ReservationStatus status){
         if (id<=0) return new ResponseEntity<>("Enter a positive Id.",HttpStatus.BAD_REQUEST);

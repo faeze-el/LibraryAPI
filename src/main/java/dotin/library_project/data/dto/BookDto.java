@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Optional;
 
 @Data
 public class BookDto {
@@ -18,13 +19,13 @@ public class BookDto {
 
     private String bookStatus = BookStatus.BOOKABLE.toString();
 
-    public Book toBook() {
+    public Optional<Book> toBook() {
         Book b = new Book();
         b.setTitle(title);
         bookStatus = bookStatus.trim().toUpperCase();
         if(BookStatus.isValidEnum(bookStatus))
             b.setBookStatus(BookStatus.valueOf(bookStatus));
-        else return null;
-        return b;
+        else return Optional.empty();
+        return Optional.of(b);
     }
 }

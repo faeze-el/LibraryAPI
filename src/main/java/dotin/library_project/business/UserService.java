@@ -37,19 +37,16 @@ public class UserService implements UserDetailsService {
     public ResponseEntity<?> addNewUser(UserDto userdto){
 
         try {
-            Optional<User> userObj = Optional.ofNullable(userdto.toUser());
-            if(userObj.isPresent()){
+            Optional<User> userObj = userdto.toUser();
                 User user = userObj.get();
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 userRepository.addUser(user);
                 return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
-            }
-
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
+//        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
 
 
     }

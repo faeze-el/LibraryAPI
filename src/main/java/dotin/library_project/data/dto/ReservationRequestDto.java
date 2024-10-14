@@ -9,6 +9,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @DateAfter(startDate = "issueDate", endDate = "returnDate", message = "End date must be after start date")
 @Data
@@ -26,12 +27,12 @@ public class ReservationRequestDto {
 //    @NotEmpty
     private Long bookId;
 
-    public ReservationRequest toReservationRequest(User user) {
+    public Optional<ReservationRequest> toReservationRequest(User user) {
         ReservationRequest r = new ReservationRequest();
         r.setIssueDate(issueDate);
         r.setReturnDate(returnDate);
         r.setBookId(bookId);
         r.setUser(user);
-        return r;
+        return Optional.of(r);
     }
 }

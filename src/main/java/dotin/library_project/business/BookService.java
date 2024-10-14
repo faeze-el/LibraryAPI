@@ -32,7 +32,7 @@ public class BookService {
     }
     public ResponseEntity<?> addNewBook(BookDto bookdto) {
         try {
-            Optional<Book> book = Optional.ofNullable(bookdto.toBook());
+            Optional<Book> book = bookdto.toBook();
             if(book.isPresent()) {
                 bookRepository.addBook(book.get());
                 return new ResponseEntity<>("Book added successfully", HttpStatus.CREATED);
