@@ -27,12 +27,4 @@ public class ReservationRequestDto {
 //    @NotEmpty
     private Long bookId;
 
-    public Optional<ReservationRequest> toReservationRequest(User user) {
-        ReservationRequest r = new ReservationRequest();
-        r.setIssueDate(issueDate);
-        r.setReturnDate(returnDate);
-        r.setBookId(bookId);
-        r.setUser(user);
-        return Optional.of(r);
-    }
 }

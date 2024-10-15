@@ -39,11 +39,13 @@ class ReservationRepositoryNoDb implements ReservationRepository{
         }
         return null;
     }
-    public ReservationRequest getReservationsByUserId(Long userId){
-        for(ReservationRequest r : list){
-            if(Objects.equals(r.getUser().getId(), userId)) return r;
+    public List<ReservationRequest> getReservationsByUserId(Long userId){
+        List<ReservationRequest> reservationRequestList = new ArrayList<>();
+        for(ReservationRequest request : list){
+            if(Objects.equals(request.getUser().getId(), userId))
+                reservationRequestList.add(request);
         }
-        return null;
+        return reservationRequestList;
     }
     public void addReservation(ReservationRequest reservation) {
         reservation.setRequestId((long) (list.size()+1));

@@ -1,5 +1,8 @@
 package dotin.library_project.business;
 
+import dotin.library_project.data.converter.BookConverter;
+import dotin.library_project.data.converter.ReservationRequestConverter;
+import dotin.library_project.data.entity.Book;
 import dotin.library_project.data.entity.User;
 import dotin.library_project.data.dto.ReservationRequestDto;
 import dotin.library_project.data.enums.BookStatus;
@@ -12,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Converter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -33,22 +37,21 @@ public class ReservationService {
     }
     public ResponseEntity<?> getReservationsByUserId(Long userId) {
         if (userId<=0) return new ResponseEntity<>("Enter a positive Id.",HttpStatus.BAD_REQUEST);
-        ReservationRequest req = reservationRepository.getReservationsByUserId(userId);
-        if(Objects.nonNull(req)) {
-            return new ResponseEntity<>(req,HttpStatus.OK);
-        }
-        return new ResponseEntity<>("Reservation not found.",HttpStatus.NOT_FOUND);
+        List<ReservationRequest> requestList = reservationRepository.getReservationsByUserId(userId);
+        return new ResponseEntity<>(requestList,HttpStatus.OK);
     }
-    public ResponseEntity<?> addNewReservation(ReservationRequestDto reqdto, User user) {
-        try {
-            Optional<ReservationRequest> request = reqdto.toReservationRequest(user);
-                reservationRepository.addReservation(request.get());
+    public ResponseEntity<?> addNewReservation(ReservationRequestDto requestDto, User user) {
+        Book book = bookRepository.getBookById(requestDto.getBookId());
+        if (book != null && book.getBookStatus()==BookStatus.BOOKABLE) {
+            try {
+                ReservationRequest request = ReservationRequestConverter.convertToReservationRequest(requestDto, user);
+                reservationRepository.addReservation(request);
                 return new ResponseEntity<>("Reservation request added successfully", HttpStatus.CREATED);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body(e.getMessage());
+            }
         }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-//        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
     }
     public ResponseEntity<?> updateReservation(Long id, ReservationStatus status){
         if (id<=0) return new ResponseEntity<>("Enter a positive Id.",HttpStatus.BAD_REQUEST);

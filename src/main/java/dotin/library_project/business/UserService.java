@@ -1,5 +1,6 @@
 package dotin.library_project.business;
 
+import dotin.library_project.data.converter.UserConverter;
 import dotin.library_project.data.entity.User;
 import dotin.library_project.data.dto.UserDto;
 import dotin.library_project.repository.UserRepository;
@@ -37,8 +38,7 @@ public class UserService implements UserDetailsService {
     public ResponseEntity<?> addNewUser(UserDto userdto){
 
         try {
-            Optional<User> userObj = userdto.toUser();
-                User user = userObj.get();
+                User user = UserConverter.convertToUser(userdto);
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 userRepository.addUser(user);
                 return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
@@ -47,8 +47,6 @@ public class UserService implements UserDetailsService {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 //        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
-
-
     }
 
     @Override

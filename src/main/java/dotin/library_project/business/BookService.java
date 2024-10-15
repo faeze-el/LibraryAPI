@@ -1,5 +1,6 @@
 package dotin.library_project.business;
 
+import dotin.library_project.data.converter.BookConverter;
 import dotin.library_project.data.entity.Book;
 import dotin.library_project.data.dto.BookDto;
 import dotin.library_project.repository.BookRepository;
@@ -32,7 +33,7 @@ public class BookService {
     }
     public ResponseEntity<?> addNewBook(BookDto bookdto) {
         try {
-            Optional<Book> book = bookdto.toBook();
+            Optional<Book> book = BookConverter.convertToBook(bookdto);
             if(book.isPresent()) {
                 bookRepository.addBook(book.get());
                 return new ResponseEntity<>("Book added successfully", HttpStatus.CREATED);

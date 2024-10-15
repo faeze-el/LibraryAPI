@@ -19,13 +19,4 @@ public class BookDto {
 
     private String bookStatus = BookStatus.BOOKABLE.toString();
 
-    public Optional<Book> toBook() {
-        Book b = new Book();
-        b.setTitle(title);
-        bookStatus = bookStatus.trim().toUpperCase();
-        if(BookStatus.isValidEnum(bookStatus))
-            b.setBookStatus(BookStatus.valueOf(bookStatus));
-        else return Optional.empty();
-        return Optional.of(b);
-    }
 }

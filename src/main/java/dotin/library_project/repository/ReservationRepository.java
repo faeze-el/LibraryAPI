@@ -10,7 +10,7 @@ import java.util.List;
 public interface ReservationRepository {
     public List<ReservationRequest> getAllReservations();
     public ReservationRequest getReservationsById(Long id);
-    public ReservationRequest getReservationsByUserId(Long userId);
+    public List<ReservationRequest> getReservationsByUserId(Long userId);
     public void addReservation(ReservationRequest reservation);
     public boolean updateReservation(Long id, ReservationStatus status);
 }

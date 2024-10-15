@@ -24,13 +24,4 @@ public class UserDto {
     @Size(min=6, max=20, message = "The name must be between 6 and 20 characters")
     private String password;
 
-
-    public Optional<User> toUser() {
-        User u = new User();
-        u.setUsername(userName);
-        u.setName(name);
-        u.setPassword(password);
-        return Optional.of(u);
-    }
-
 }
