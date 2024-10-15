@@ -40,6 +40,7 @@ public class BookService {
         bookRepository.addBook(book.get());
         return new ApiResponse<>(true,"Book added successfully");
     }
+
     public ApiResponse<?> getBookById(Long id) throws Exception {
         if (id<=0) throw new MyException("Enter a positive Id.",HttpStatus.BAD_REQUEST);
         final Book result =  bookRepository.getBookById(id);
