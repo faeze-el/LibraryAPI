@@ -10,6 +10,7 @@ import dotin.library_project.data.entity.ReservationRequest;
 import dotin.library_project.exception_handler.MyException;
 import dotin.library_project.repository.BookRepository;
 import dotin.library_project.repository.ReservationRepository;
+import dotin.library_project.web.ApiResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,21 +29,23 @@ public class ReservationService {
         this.bookRepository = bookRepository;
     }
 
-    public List<ReservationRequest> getReservationRequestList() {
-        return reservationRepository.getAllReservations();
+    public ApiResponse<?> getReservationRequestList() {
+        List<ReservationRequest> requestList = reservationRepository.getAllReservations();
+        return new ApiResponse<>(true,requestList);
     }
-    public List<ReservationRequest> getReservationsByUserId(Long userId) {
-        return reservationRepository.getReservationsByUserId(userId);
+    public ApiResponse<?> getReservationsByUserId(Long userId) {
+        List<ReservationRequest> requestList = reservationRepository.getReservationsByUserId(userId);
+        return new ApiResponse<>(true,requestList);
     }
-    public String addNewReservation(ReservationRequestDto requestDto, User user) throws MyException {
+    public ApiResponse<?> addNewReservation(ReservationRequestDto requestDto, User user) throws MyException {
         Book book = bookRepository.getBookById(requestDto.getBookId());
         if (book == null || book.getBookStatus()!=BookStatus.BOOKABLE)
             throw new MyException("Not valid inputs",HttpStatus.BAD_REQUEST);
         ReservationRequest request = ReservationRequestConverter.convertToReservationRequest(requestDto, user);
         reservationRepository.addReservation(request);
-        return "Reservation request added successfully";
+        return new ApiResponse<>(true,"Reservation request added successfully");
     }
-    public String updateReservation(Long id, ReservationStatus status) throws MyException {
+    public ApiResponse<?> updateReservation(Long id, ReservationStatus status) throws MyException {
         if (id<=0) throw new MyException("Enter a positive Id.",HttpStatus.BAD_REQUEST);
 
         ReservationRequest request = reservationRepository.getReservationsById(id);
@@ -53,6 +56,6 @@ public class ReservationService {
         if (!flag) throw new MyException("Update failed.", HttpStatus.INTERNAL_SERVER_ERROR);
 
         bookRepository.updateStatusById(request.getBookId(), status== ReservationStatus.APPROVED? BookStatus.NOT_BOOKABLE : BookStatus.BOOKABLE);
-        return String.format("Reservation request %s .",status);
+        return new ApiResponse<>(true,String.format("Reservation request %s .",status));
         }
 }

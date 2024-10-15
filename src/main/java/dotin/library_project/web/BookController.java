@@ -32,16 +32,14 @@ public class BookController {
     @GetMapping
     @Operation(summary = "return list of books")
     public ResponseEntity<ApiResponse<?>> getBooksList() throws MyException {
-        List<Book> books = service.getBooks();
-        ApiResponse<?> response = new ApiResponse<>(true,books);
+        ApiResponse<?> response = service.getBooks();
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("{id}")
     @Operation(summary = "return a book by id given or null if not found")
     public ResponseEntity<ApiResponse<?>> getBookByID(@Valid @PathVariable  Long id) throws Exception {
-        Book book = service.getBookById(id);
-        ApiResponse<?> response = new ApiResponse<>(true,book);
+        ApiResponse<?> response = service.getBookById(id);
         return ResponseEntity.ok(response);
     }
 
@@ -50,8 +48,7 @@ public class BookController {
     @Operation(summary = "add new book")
     public ResponseEntity<ApiResponse<?>> addNewBook(@Valid @RequestBody BookDto bookdto) throws Exception
     {
-        String result = service.addNewBook(bookdto);
-        ApiResponse<?> response = new ApiResponse<>(true, result);
+        ApiResponse<?> response = service.addNewBook(bookdto);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
@@ -59,8 +56,7 @@ public class BookController {
     @DeleteMapping("{title}")
     @Operation(summary = "remove a book by title")
      public ResponseEntity<ApiResponse<?>> removeBook(@Valid @PathVariable String title) throws MyException {
-        String result = service.removeBookByTitle(title);
-        ApiResponse<?> response = new ApiResponse<>(true, result);
+        ApiResponse<?> response = service.removeBookByTitle(title);
         return ResponseEntity.ok(response);
     }
 }

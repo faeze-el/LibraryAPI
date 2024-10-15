@@ -35,8 +35,7 @@ public class ReservationController {
     @GetMapping
     @Operation(summary = "return list of reservation requests")
     public ResponseEntity<ApiResponse<?>> getRequestsList(){
-        List<ReservationRequest> requestList = service.getReservationRequestList();
-        ApiResponse<?> response = new ApiResponse<>(true,requestList);
+        ApiResponse<?> response = service.getReservationRequestList();
         return ResponseEntity.ok(response);
     }
 
@@ -45,8 +44,7 @@ public class ReservationController {
     @Operation(summary = "add new reservation request")
     public ResponseEntity<ApiResponse<?>> addNewReservation(@Valid @RequestBody ReservationRequestDto reqdto) throws MyException {
         User user = userService.getUserFromSecurityContext();
-        String result = service.addNewReservation(reqdto, user);
-        ApiResponse<?> response = new ApiResponse<>(true, result);
+        ApiResponse<?> response = service.addNewReservation(reqdto, user);
         return new  ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -55,8 +53,7 @@ public class ReservationController {
     @Operation(summary = "return reservation request by id given")
     public ResponseEntity<ApiResponse<?>> getReservationsUser(){
         User user = userService.getUserFromSecurityContext();
-        List<ReservationRequest> requestList = service.getReservationsByUserId(user.getId());
-        ApiResponse<?> response = new ApiResponse<>(true, requestList);
+        ApiResponse<?> response = service.getReservationsByUserId(user.getId());
         return ResponseEntity.ok(response);
     }
 
@@ -64,8 +61,7 @@ public class ReservationController {
     @PutMapping("{requestId}")
     @Operation(summary = "reject or approve a request")
     public ResponseEntity<ApiResponse<?>> updateReservationByRequestId(@Valid @PathVariable Long requestId,@Valid @RequestParam("status") ReservationStatus status) throws MyException {
-        String result = service.updateReservation(requestId, status);
-        ApiResponse<?> response = new ApiResponse<>(true, result);
+        ApiResponse<?> response = service.updateReservation(requestId, status);
         return ResponseEntity.ok(response);
     }
 }

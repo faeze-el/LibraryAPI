@@ -30,8 +30,7 @@ public class UserController {
     @Operation(summary = "return list of users")
     @LogExecutionTime
     public ResponseEntity<ApiResponse<?>> getUsersList(){
-        List<User> users = service.getUsers();
-        ApiResponse<?> response = new ApiResponse<>(true,users);
+        ApiResponse<?> response = service.getUsers();
         return ResponseEntity.ok(response);
     }
 
@@ -39,8 +38,7 @@ public class UserController {
     @PostMapping
     @Operation(summary = "add new user")
     public ResponseEntity<ApiResponse<?>> addNewUser(@Valid @RequestBody UserDto userdto){
-        String result = service.addNewUser(userdto);
-        ApiResponse<?> response = new ApiResponse<>(true, result);
+        ApiResponse<?> response = service.addNewUser(userdto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }
