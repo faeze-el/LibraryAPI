@@ -39,8 +39,10 @@ public class ReservationService {
     }
     public ApiResponse<?> addNewReservation(ReservationRequestDto requestDto, User user) throws MyException {
         Book book = bookRepository.getBookById(requestDto.getBookId());
-        if (book == null || book.getBookStatus()!=BookStatus.BOOKABLE)
-            throw new MyException("Not valid inputs",HttpStatus.BAD_REQUEST);
+        if (book == null )
+            throw new MyException("book not found",HttpStatus.BAD_REQUEST);
+        if(book.getBookStatus()!=BookStatus.BOOKABLE)
+            throw new MyException("book is not bookable",HttpStatus.BAD_REQUEST);
         ReservationRequest request = ReservationRequestConverter.convertToReservationRequest(requestDto, user);
         reservationRepository.addReservation(request);
         return new ApiResponse<>(true,"Reservation request added successfully");

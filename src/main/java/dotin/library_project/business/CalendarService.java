@@ -25,7 +25,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -106,9 +105,7 @@ public class CalendarService {
         }
     }
 
-    public Event addEvent(CalendarDto calendarDto) throws IOException {
-        //Date oneHourFromNow = getRelativeDate(java.util.Calendar.HOUR, 1);
-        //Date twoHoursFromNow = getRelativeDate(java.util.Calendar.HOUR, 2);
+    public void addEvent(CalendarDto calendarDto) throws IOException {
         DateTime start = new DateTime(calendarDto.getStartDate(), TimeZone.getTimeZone("UTC"));
         DateTime end = new DateTime(calendarDto.getEndDate(), TimeZone.getTimeZone("UTC"));
 
@@ -116,6 +113,6 @@ public class CalendarService {
                 .setReminders(new Event.Reminders().setUseDefault(false))
                 .setStart(new EventDateTime().setDateTime(start))
                 .setEnd(new EventDateTime().setDateTime(end));
-        return service.events().insert(CALENDAR_ID, event).execute();
+        service.events().insert(CALENDAR_ID, event).execute();
     }
 }

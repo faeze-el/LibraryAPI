@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -54,15 +55,17 @@ public class ReservationController {
     @PreAuthorize("hasRole('READER')")
     @PostMapping
     @Operation(summary = "add new reservation request")
-    public ResponseEntity<ApiResponse<?>> addNewReservation(@Valid @RequestBody ReservationRequestDto reqdto) throws MyException {
+    public ResponseEntity<ApiResponse<?>> addNewReservation(@Valid @RequestBody ReservationRequestDto reqdto) throws Exception {
         User user = userService.getUserFromSecurityContext();
-        ResponseEntity<?> res = bookService.getBookById(reqdto.getBookId());
-        if (res.getStatusCode()== HttpStatus.OK){
-        CalendarDto calendarDto = toCalendarDto(reqdto, (Book) res.getBody());
-        calendarService.addEvent(calendarDto);
+        ApiResponse<?> res = null;
+        res = bookService.getBookById(reqdto.getBookId());
+        if (res.isSuccess()){
+            ApiResponse<?> response = service.addNewReservation(reqdto, user);
+            CalendarDto calendarDto = toCalendarDto(reqdto, (Book) res.getData());
+            calendarService.addEvent(calendarDto);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
         }
-        ApiResponse<?> response = service.addNewReservation(reqdto, user);
-        return new  ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(res, HttpStatus.NOT_FOUND);
     }
 
     @PreAuthorize("hasRole('READER')")

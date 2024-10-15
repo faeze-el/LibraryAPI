@@ -18,16 +18,12 @@ import java.util.Optional;
 public class ReservationRequestDto {
     @FutureOrPresent(message = "The event date must be in the future")
     @NotNull(message = "The issueDate is required.")
-//    @NotBlank(message = "The issueDate is required and can not be empty.")
     private LocalDate issueDate;
 
     @Future(message = "The event date must be in the future")
     @NotNull(message = "The returnDate is required.")
-//    @NotBlank(message = "The returnDate is required and can not be empty.")
     private LocalDate returnDate;
 
 //    @NotEmpty
     private Long bookId;
-    //private ReservationStatus status;
-
 }
