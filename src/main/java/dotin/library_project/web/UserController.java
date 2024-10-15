@@ -5,6 +5,7 @@ import dotin.library_project.data.entity.User;
 import dotin.library_project.data.dto.UserDto;
 import dotin.library_project.business.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,14 +29,18 @@ public class UserController {
     @GetMapping
     @Operation(summary = "return list of users")
     @LogExecutionTime
-    public List<User> getUsersList(){
-        return service.getUsers();
+    public ResponseEntity<ApiResponse<?>> getUsersList(){
+        List<User> users = service.getUsers();
+        ApiResponse<?> response = new ApiResponse<>(true,users);
+        return ResponseEntity.ok(response);
     }
 
     @PreAuthorize("hasRole('LIBRARIAN') or hasRole('ADMIN')")
     @PostMapping
     @Operation(summary = "add new user")
-    public ResponseEntity<?> addNewUser(@Valid @RequestBody UserDto userdto){
-        return service.addNewUser(userdto);
+    public ResponseEntity<ApiResponse<?>> addNewUser(@Valid @RequestBody UserDto userdto){
+        String result = service.addNewUser(userdto);
+        ApiResponse<?> response = new ApiResponse<>(true, result);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }

@@ -35,18 +35,11 @@ public class UserService implements UserDetailsService {
         return userRepository.getAllUsers();
     }
 
-    public ResponseEntity<?> addNewUser(UserDto userdto){
-
-        try {
-                User user = UserConverter.convertToUser(userdto);
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-                userRepository.addUser(user);
-                return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
-        }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-//        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
+    public String addNewUser(UserDto userdto){
+        User user = UserConverter.convertToUser(userdto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.addUser(user);
+        return "User added successfully";// HttpStatus.CREATED);
     }
 
     @Override

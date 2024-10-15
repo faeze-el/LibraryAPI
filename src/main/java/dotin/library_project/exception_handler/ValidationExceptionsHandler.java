@@ -1,9 +1,12 @@
 package dotin.library_project.exception_handler;
 
+import dotin.library_project.web.ApiResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,5 +25,11 @@ public class ValidationExceptionsHandler {
             errors.put(fieldName, errorMessage);
         });
         return errors;
+    }
+
+    @ExceptionHandler(MyException.class)
+    public ResponseEntity<ApiResponse<?>> handleMyException(MyException ex) {
+        ApiResponse<?> response = new ApiResponse<>(false,ex.getMessage(),ex.getStatus().value());
+        return new ResponseEntity<>(response, ex.getStatus());
     }
 }
