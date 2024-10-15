@@ -46,8 +46,10 @@ public class BookService {
     }
     public ResponseEntity<?> getBookById(Long id) {
         if (id<=0) return new ResponseEntity<>("Enter a positive Id.",HttpStatus.BAD_REQUEST);
-        final Book result =  bookRepository.getBookById(id);
-        return new ResponseEntity<>(result, Objects.nonNull(result) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        final Optional<Book> result = Optional.ofNullable(bookRepository.getBookById(id));
+        if (result.isPresent())
+            return new ResponseEntity<>(result.get(), HttpStatus.OK);
+        else return new ResponseEntity<>("Book not found", HttpStatus.NOT_FOUND);
     }
     @Transactional
     public ResponseEntity<String> removeBookByTitle( String title) {

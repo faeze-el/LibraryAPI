@@ -1,14 +1,10 @@
 package dotin.library_project.data.dto;
 
-import dotin.library_project.data.entity.Book;
 import dotin.library_project.data.enums.BookStatus;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Optional;
 
 @Data
 public class BookDto {
