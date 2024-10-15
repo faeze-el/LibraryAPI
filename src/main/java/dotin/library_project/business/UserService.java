@@ -4,6 +4,7 @@ import dotin.library_project.data.converter.UserConverter;
 import dotin.library_project.data.entity.User;
 import dotin.library_project.data.dto.UserDto;
 import dotin.library_project.repository.UserRepository;
+import dotin.library_project.web.ApiResponse;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -31,22 +32,16 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getUsers(){
-        return userRepository.getAllUsers();
+    public ApiResponse<?> getUsers(){
+        List<User> users = userRepository.getAllUsers();
+        return new ApiResponse<>(true,users);
     }
 
-    public ResponseEntity<?> addNewUser(UserDto userdto){
-
-        try {
-                User user = UserConverter.convertToUser(userdto);
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-                userRepository.addUser(user);
-                return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
-        }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-//        return new ResponseEntity<>("Not valid inputs", HttpStatus.BAD_REQUEST);
+    public ApiResponse<?> addNewUser(UserDto userdto){
+        User user = UserConverter.convertToUser(userdto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.addUser(user);
+        return new ApiResponse<>(true,"User added successfully");
     }
 
     @Override

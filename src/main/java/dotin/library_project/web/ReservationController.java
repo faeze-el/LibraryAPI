@@ -11,6 +11,7 @@ import dotin.library_project.data.enums.ReservationStatus;
 import dotin.library_project.data.entity.ReservationRequest;
 import dotin.library_project.business.ReservationService;
 import dotin.library_project.business.UserService;
+import dotin.library_project.exception_handler.MyException;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,36 +46,39 @@ public class ReservationController {
     @PostAuthorize("hasRole('ADMIN') or hasRole('LIBRARIAN')")
     @GetMapping
     @Operation(summary = "return list of reservation requests")
-    public List<ReservationRequest> getRequestsList(){
-        return service.getReservationRequestList();
+    public ResponseEntity<ApiResponse<?>> getRequestsList(){
+        ApiResponse<?> response = service.getReservationRequestList();
+        return ResponseEntity.ok(response);
     }
 
     @PreAuthorize("hasRole('READER')")
     @PostMapping
     @Operation(summary = "add new reservation request")
-    public ResponseEntity<?> addNewReservation(@Valid @RequestBody ReservationRequestDto reqdto) throws IOException {
+    public ResponseEntity<ApiResponse<?>> addNewReservation(@Valid @RequestBody ReservationRequestDto reqdto) throws MyException {
         User user = userService.getUserFromSecurityContext();
         ResponseEntity<?> res = bookService.getBookById(reqdto.getBookId());
         if (res.getStatusCode()== HttpStatus.OK){
         CalendarDto calendarDto = toCalendarDto(reqdto, (Book) res.getBody());
         calendarService.addEvent(calendarDto);
-        return service.addNewReservation(reqdto, user);
         }
-        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
+        ApiResponse<?> response = service.addNewReservation(reqdto, user);
+        return new  ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('READER')")
     @GetMapping("reservation")
     @Operation(summary = "return reservation request by id given")
-    public ResponseEntity< ?> getReservationsUser() throws IOException {
+    public ResponseEntity<ApiResponse<?>> getReservationsUser(){
         User user = userService.getUserFromSecurityContext();
-        return service.getReservationsByUserId(user.getId());
+        ApiResponse<?> response = service.getReservationsByUserId(user.getId());
+        return ResponseEntity.ok(response);
     }
 
     @PreAuthorize("hasRole('LIBRARIAN')")
     @PutMapping("{requestId}")
     @Operation(summary = "reject or approve a request")
-    public ResponseEntity<?> updateReservationByRequestId(@Valid @PathVariable Long requestId,@Valid @RequestParam("status") ReservationStatus status){
-        return service.updateReservation(requestId, status);
+    public ResponseEntity<ApiResponse<?>> updateReservationByRequestId(@Valid @PathVariable Long requestId,@Valid @RequestParam("status") ReservationStatus status) throws MyException {
+        ApiResponse<?> response = service.updateReservation(requestId, status);
+        return ResponseEntity.ok(response);
     }
 }
