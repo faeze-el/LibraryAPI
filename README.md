@@ -22,9 +22,12 @@ The Library System is a Java application that fasilate users to manage book rese
  - status
 
 ## User propertiess:
-- name
+- username
 - id
 - pass
+- name
+- role
+- enabled
 
 ## Requests propertiess:
 - userid
